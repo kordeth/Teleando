@@ -1,5 +1,10 @@
 :root {
     --primary-color: #3252DF;
+    --primary-font: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--primary-font);
 }
 
 .btn-primary {
