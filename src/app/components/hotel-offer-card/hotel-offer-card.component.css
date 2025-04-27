@@ -1,0 +1,55 @@
+:host {
+  display: block;
+}
+
+.hotel-card {
+  height: 300px;
+  position: relative;
+}
+
+.hotel-image {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.hotel-gradient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  pointer-events: none; /* Permite que clicks pasen a los botones si hay */
+}
+
+.price-tag {
+  position: absolute;
+  top: 0.75rem;
+  right: 0;
+  background-color: #f64f77; /* rosa fuerte */
+  font-weight: 600;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.hotel-info {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 2; /* Asegura que el texto esté encima del overlay */
+}
+
+.d-flex {
+  scroll-behavior: smooth;
+}
+
+.d-flex::-webkit-scrollbar {
+  height: 6px;
+}
+
+.d-flex::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}

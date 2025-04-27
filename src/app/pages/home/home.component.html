@@ -1,4 +1,4 @@
-<section class="hero-section container py-5">
+<section class="hero-section container py-3">
     <div class="row align-items-center">
         <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
             <h1 class="hero-title">Olvida el estrés,<br>reserva tu espacio ideal</h1>
@@ -22,5 +22,22 @@
                 <img src="assets/illustrations/il-home.svg" alt="Hotel Moderno" class="img-fluid rounded-4 shadow-sm">
             </div>
         </div>
+    </div>
+</section>
+<section class="container my-5">
+    <h2 class="mb-4">Ofertas</h2>
+    <div class="d-flex overflow-auto flex-nowrap gap-3 pb-2">
+        <div *ngFor="let offer of offers" class="flex-shrink-0" style="width: 250px;">
+            <hotel-offer-card [offer]="offer"></hotel-offer-card>
+        </div>
+    </div>
+</section>
+<section class="container my-5">
+    <h2 class="mb-4">Más populares</h2>
+    <div class="d-flex overflow-auto flex-nowrap gap-3 pb-2">
+        <hotel-card></hotel-card>
+        <!-- <div *ngFor="let offer of offers" class="flex-shrink-0" style="width: 250px;">
+            <hotel-offer-card [offer]="offer"></hotel-offer-card>
+        </div> -->
     </div>
 </section>

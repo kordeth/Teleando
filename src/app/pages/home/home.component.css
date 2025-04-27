@@ -31,3 +31,23 @@
   border-radius: 1rem;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
+
+.horizontal-scroll {
+  display: flex;
+  flex-wrap: nowrap;        /* Muy importante: no saltar a nueva línea */
+  overflow-x: auto;          /* Scroll horizontal si se llena */
+  gap: 1rem;                 /* Espacio entre tarjetas */
+  padding-bottom: 1rem;      /* Separación abajo para el scroll */
+  scroll-snap-type: x mandatory; /* Que se "pegue" el scroll */
+  -webkit-overflow-scrolling: touch; /* Para scroll suave en iOS */
+}
+
+.scroll-item {
+  flex: 0 0 auto;            /* No se reducen, tamaño fijo */
+  width: 250px;              /* Ancho de cada tarjeta */
+  scroll-snap-align: start;  /* Snappea al inicio */
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;             /* Oculta la scrollbar en Chrome/Safari */
+}

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-hotel-card',
+  selector: 'hotel-card',
   imports: [],
   templateUrl: './hotel-card.component.html',
   styleUrl: './hotel-card.component.css',

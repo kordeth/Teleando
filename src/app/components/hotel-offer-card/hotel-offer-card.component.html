@@ -1,0 +1,14 @@
+<div class="hotel-card position-relative overflow-hidden rounded-4 shadow-sm">
+    <img [src]="offer().image" alt="Hotel" class="hotel-image w-100 h-100 object-fit-cover">
+  
+    <div class="price-tag bg-pink text-white px-3 py-1 rounded-end">
+      {{ offer().offer }}
+    </div>
+    <div class="hotel-gradient-overlay"></div>
+  
+    <div class="hotel-info text-white">
+      <h5 class="mb-0"> {{ offer().name }}</h5>
+      <small>{{ offer().location }}</small>
+    </div>
+  </div>
+
