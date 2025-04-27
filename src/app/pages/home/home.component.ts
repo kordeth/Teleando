@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HotelCardComponent } from "@components/hotel-card/hotel-card.component";
 import { HotelOfferCardComponent } from '@components/hotel-offer-card/hotel-offer-card.component';
 import { OfferModel } from '@models/home-model';
+import { MostPopularModel } from '@models/home-model';
 import { HomeService } from '@services/home/home.service';
 import { CommonModule } from '@angular/common';
 
@@ -21,16 +22,22 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent { 
   offers: OfferModel[] = [];
+  populars: MostPopularModel[] = [];
   
   constructor(
     private homeService: HomeService
   ) {}
 
   ngOnInit() {
-    
     this.homeService.getCurrentOffers().subscribe(
       (data) => {
         this.offers = data;
       });
+      this.homeService.getMostPopular().subscribe(
+        (data) => {
+          this.populars = data;
+        }
+      );
   }
+  
 }

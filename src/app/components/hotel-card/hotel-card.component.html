@@ -1,1 +1,17 @@
-<p>hotel-card works!</p>,
+<div class="popular-hotel-card-container text-center">
+    <div class="popular-hotel-card position-relative overflow-hidden rounded-4 shadow-sm mb-2">
+      
+      <img [src]="popular().image" alt="{{ popular().name }}" class="hotel-image w-100 h-100 rounded-4">
+      
+      <div *ngIf="popular().isPopular" class="popular-badge">
+        Más <span class="fw-light">popular</span>
+      </div>
+    
+    </div>
+  
+    <!-- Nombre y ubicación abajo de la imagen -->
+    <div class="hotel-info-text">
+      <h6 class="mb-1">{{ popular().name }}</h6>
+      <small class="text-muted">{{ popular().location }}</small>
+    </div>
+  </div>

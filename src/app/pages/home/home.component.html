@@ -33,11 +33,11 @@
     </div>
 </section>
 <section class="container my-5">
-    <h2 class="mb-4">Más populares</h2>
+    <h2 class="mb-4">Recomendados</h2>
     <div class="d-flex overflow-auto flex-nowrap gap-3 pb-2">
-        <hotel-card></hotel-card>
-        <!-- <div *ngFor="let offer of offers" class="flex-shrink-0" style="width: 250px;">
-            <hotel-offer-card [offer]="offer"></hotel-offer-card>
-        </div> -->
+        <!-- <hotel-card></hotel-card> -->
+        <div *ngFor="let popular of populars" class="flex-shrink-0" style="width: 250px;">
+            <hotel-card [popular]="popular"></hotel-card>
+          </div>
     </div>
 </section>
