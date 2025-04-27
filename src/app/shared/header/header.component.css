@@ -1,3 +1,14 @@
 :host {
   display: block;
 }
+
+.navbar-nav .nav-link {
+  color: #212529;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--primary-color);
+}
