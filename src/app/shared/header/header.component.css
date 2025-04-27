@@ -12,3 +12,7 @@
 .navbar-nav .nav-link.active {
   color: var(--primary-color);
 }
+
+.active-link {
+  color: var(--primary-color) !important;
+}

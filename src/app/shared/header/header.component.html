@@ -6,9 +6,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-          <a class="nav-link" href="#">Reservar</a>
-          <a class="nav-link" href="#">Contáctanos</a>
+          <a class="nav-link" routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Inicio</a>          
+          <a class="nav-link" routerLink="list" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Reservar</a>
+          <a class="nav-link" routerLink="contactus" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Contáctanos</a>
         </div>
       </div>
     </div>

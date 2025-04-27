@@ -9,6 +9,7 @@
       "@shared/*": ["src/app/shared/*"],
       "@models/*": ["src/app/models/*"],
       "@services/*": ["src/app/services/*"],
+      "@pages/*": ["src/app/pages/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
