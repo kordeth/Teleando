@@ -1,0 +1,119 @@
+[33mcommit 0145332e4a8cc8349a977d16fed2ff9a3e68979c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Mon Apr 28 01:56:43 2025 -0500
+
+    fix: Update text
+
+[33mcommit 4cd9ce2b8f7a0844266e0b08e9d874772bebdc49[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Mon Apr 28 01:52:52 2025 -0500
+
+    feat(booking): Add payment and validation pages
+
+[33mcommit d070d2f66971d36184fe625e5ca7a79991cb7a23[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Mon Apr 28 01:10:54 2025 -0500
+
+    feat(booking): Add booking-info component
+
+[33mcommit d2c08ed49acaee86ea97d8310727aa40f7364aeb[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Mon Apr 28 00:26:12 2025 -0500
+
+    feat(booking-card): navigate with booking data using router state
+
+[33mcommit f2127f1262fd8f3e783faacf986aeccdc51bdc02[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Mon Apr 28 00:17:52 2025 -0500
+
+    feat(hotel-detail): Add hotel-detail component
+
+[33mcommit f2b13916657360b8680353570a85640c991a40c0[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sun Apr 27 20:19:48 2025 -0500
+
+    feat(hotel-list): Add hotel-item component and routes
+
+[33mcommit d8777422dd0351733b6a39846f6ad316b6760cf9[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sun Apr 27 17:26:19 2025 -0500
+
+    feat(navbar): Improve links
+
+[33mcommit e721f2e6c49f01e4412e379e44c5aa427508ad40[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sun Apr 27 16:42:22 2025 -0500
+
+    feat(home): integrate hotel-offer-card component with mock service
+
+[33mcommit 550d31900c7214b7fa7e50a28ff6f0541cc5785d[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sun Apr 27 13:40:42 2025 -0500
+
+    feat(home): integrate hotel-offer-card component with mock offers service
+
+[33mcommit 48c36fc0b3e0dcc06c51a78346a82d6b5a9215a1[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sun Apr 27 00:31:56 2025 -0500
+
+    refactor: Reference to primary button in HomeComponent
+
+[33mcommit 01e7177d2cf019c3917bd92e9e3126640c2a1c05[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sat Apr 26 23:54:52 2025 -0500
+
+    style: improve code formatting and indentation
+
+[33mcommit 8b8d625d35f79e1a818f0cef8094052428e654e8[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sat Apr 26 23:53:08 2025 -0500
+
+    feat(home): implement hero section with customized primary button
+
+[33mcommit 9bc06467d5298d4e00d59a0c63f26ef58b2bd81c[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sat Apr 26 23:31:51 2025 -0500
+
+    feat(styles): integrate Poppins font and ensure consistent typography across the app
+
+[33mcommit 87ccfb05bdd80d5413e5567145e5e878476f2d3b[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sat Apr 26 23:20:22 2025 -0500
+
+    feat(styles): define primary color and apply it across the app
+
+[33mcommit 81649c9bb44d910fc94a3c289bb972f335f21f03[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sat Apr 26 23:10:24 2025 -0500
+
+    feat(layout): Implement initial structure and styling for header and footer
+
+[33mcommit 91044ff314f2b77e709e96095bea5d0b51f2c2a1[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sat Apr 26 22:41:42 2025 -0500
+
+    feat: Add path for home page
+
+[33mcommit d1b644f65d55811cbe16846c882cf2394a9c208c[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sat Apr 26 22:38:48 2025 -0500
+
+    chore(project): Add Bootstrap reference fot builds
+
+[33mcommit 58b687196c5acf7b5d160a1dbc38c58e781ab7d2[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sat Apr 26 22:16:27 2025 -0500
+
+    chore(project): scaffold pages and components structure
+
+[33mcommit 4a282f3ef1a80a2404bca648168912d12fab907f[m
+Author: Ana Llerena <llerena.ana.22@gmail.com>
+Date:   Sat Apr 26 18:43:14 2025 -0500
+
+    chore(project): Integrate Bootstrap framework for UI styling
+
+[33mcommit 8f47dcac37bafadf78c906074b079bf2a8c114b6[m
+Author: Lopez <gerardoalonso.lopez@hlag.com>
+Date:   Tue Apr 22 17:05:46 2025 -0500
+
+    initial commit
