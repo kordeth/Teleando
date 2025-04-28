@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms'
+import { HotelDetailModel } from '@models/hotel-detail';
 import { RouterModule, Router } from '@angular/router';
 
 @Component({
@@ -11,7 +12,7 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class HotelBookingCardComponent {
   
-  @Input({ required: true }) pricePerHour!: number;
+  detail = input.required<HotelDetailModel>();
   selectedDate: string = '';
   today: string = '';
 
@@ -20,13 +21,14 @@ export class HotelBookingCardComponent {
   constructor(private router: Router) {
     const now = new Date();
     this.today = now.toISOString().split('T')[0];
+    this.selectedDate = this.today;
   }
 
   readonly minHours: number = 3;
   readonly maxHours: number = 12; 
 
   get totalPrice(): number {
-    return this.pricePerHour * this.hours;
+    return this.detail().pricePerHour * this.hours;
   }
 
   increment(): void {
@@ -46,7 +48,10 @@ export class HotelBookingCardComponent {
       state: {
         selectedDate: this.selectedDate,
         selectedHours: this.hours,
-        pricePerHour: this.pricePerHour,
+        name: this.detail().name,
+        location: this.detail().location,
+        image: this.detail().images[1],
+        pricePerHour: this.detail().pricePerHour,
         totalPrice: this.totalPrice
       }
     });

@@ -1,1 +1,65 @@
-<p>booking-info works!</p>,
+<div class="container my-5">
+
+    <!-- Steps -->
+    <div class="d-flex justify-content-center align-items-center gap-4 mb-5">
+      <div class="step active">1</div>
+      <div class="step">2</div>
+      <div class="step">3</div>
+    </div>
+  
+    <!-- Título principal -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Información de Reserva</h2>
+      <p class="text-muted small">Por favor, completa el formulario</p>
+    </div>
+  
+    <!-- Contenido dividido -->
+    <div class="row justify-content-center align-items-start g-5">
+  
+      <!-- Imagen Hotel + Info -->
+      <div class="col-12 col-lg-5 text-center text-lg-start">
+        <div class="card border-0 shadow-sm">
+          <img [src]="image" alt="Hotel" class="card-img-top rounded-4" style="height: 280px; object-fit: cover;">
+          <div class="card-body text-start">
+            <h5 class="card-title mb-1">{{ name }}</h5>
+            <p class="text-muted small">{{ location }}</p>
+            <p class="fw-bold">{{ totalPrice }} <span class="small text-muted">per {{ selectedHours }} hours</span></p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Formulario -->
+      <div class="col-12 col-lg-5">
+        <form (ngSubmit)="submitForm()" #bookingForm="ngForm">
+  
+          <div class="mb-3">
+            <label class="form-label small text-muted">Nombre</label>
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="form.firstName" required placeholder="Completa esta información">
+          </div>
+  
+          <div class="mb-3">
+            <label class="form-label small text-muted">Apellido</label>
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="form.lastName" required placeholder="Completa esta información">
+          </div>
+  
+          <div class="mb-3">
+            <label class="form-label small text-muted">Correo electrónico</label>
+            <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required placeholder="Completa esta información">
+          </div>
+  
+          <div class="mb-4">
+            <label class="form-label small text-muted">Número de teléfono</label>
+            <input type="tel" class="form-control" name="phone" [(ngModel)]="form.phone" required placeholder="Completa esta información">
+          </div>
+  
+          <div class="d-flex gap-3">
+            <button type="button" class="btn btn-outline-secondary flex-fill" (click) = "cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-primary flex-fill" [disabled]="!bookingForm.valid">Continuar</button>
+          </div>
+  
+        </form>
+      </div>
+  
+    </div>
+  
+  </div>
