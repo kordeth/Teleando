@@ -1,0 +1,26 @@
+<div class="card shadow-sm p-4 rounded-4">
+    <h6 class="text-muted mb-2">Inicar reserva</h6>
+    <h3 class="fw-bold text-success">
+        S/ {{ pricePerHour }} <small class="text-muted">por hora</small>
+    </h3>
+    <div class="my-4">
+        <label class="form-label small text-muted">¿Cuántas horas quieres reservar?</label>
+        <div class="d-flex align-items-center justify-content-center gap-2">
+            <button (click)="decrement()" class="btn btn-danger btn-sm px-3">-</button>
+            <span class="fw-bold">{{ hours }} horas</span>
+            <button (click)="increment()" class="btn btn-success btn-sm px-3">+</button>
+        </div>
+    </div>
+    <div class="mb-4">
+        <label class="form-label small text-muted">Elige una fecha</label>
+        <div class="input-group">
+            <input type="date" class="form-control" [(ngModel)]="selectedDate" [min]="today" />
+        </div>
+    </div>
+
+    <p class="small text-muted mb-4">
+        Pagarás <strong class="text-dark">S/ {{ totalPrice }}</strong> por <strong class="text-dark">{{ hours }}
+            horas</strong>
+    </p>
+    <button class="btn btn-primary w-100">Reservar ahora</button>
+</div>

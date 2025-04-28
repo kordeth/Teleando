@@ -1,1 +1,45 @@
-<p>hotel-detail works!</p>,
+<div class="container my-5">
+
+    <!-- Encabezado hotel -->
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h3 class="fw-bold">{{ detail[0].name }}</h3>
+        <h6 class="text-muted">{{ detail[0].location }}</h6>
+      </div>
+    </div>
+  
+    <!-- Primera fila: Carrusel + Booking Card -->
+    <div class="row g-5">
+      <div class="mt-4 col-12 col-lg-8">
+        <hotel-carousel [images]="detail[0].images"></hotel-carousel>
+      </div>
+  
+      <div class="mt-5 col-12 col-lg-4">
+        <hotel-booking-card [pricePerHour]="detail[0].pricePerHour"></hotel-booking-card>
+      </div>
+    </div>
+  
+    <!-- Segunda fila: Descripción + Amenities -->
+    <div class="row g-5 mt-4">
+  
+      <!-- Descripción -->
+      <div class="col-12 col-lg-8">
+        <h5>Sobre la habitación</h5>
+        <p class="text-muted">
+          {{ detail[0].description }}
+        </p>
+      </div>
+  
+      <!-- Amenities -->
+      <div class="col-12 col-lg-4">
+        <div class="row row-cols-2 row-cols-md-3 g-3">
+          <div *ngFor="let amenity of detail[0].amenities" class="col text-center">
+            <i class="bi fs-4 text-primary mb-2" [ngClass]="amenityIconMap[amenity.icon]"></i>
+            <div class="small">{{ amenity.label }}</div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>

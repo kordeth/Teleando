@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HotelItemModel } from '@models/hotel-item';
 import { HotelItemComponent } from '@components/hotel-item/hotel-item.component';
-import { HotelListService } from '@services/hotel-list/hotel-list.servive';
+import { HotelListService } from '@services/hotel-list/hotel-list.service';
 
 @Component({
   selector: 'hotel-list',
@@ -22,8 +22,7 @@ export class HotelListComponent {
     ngOnInit() {
       this.hotelListService.getHotelList().subscribe(
         (data) => {
-          this.list = data;
-          console.log(this.list);
+          this.list = data
         });
     }
 }

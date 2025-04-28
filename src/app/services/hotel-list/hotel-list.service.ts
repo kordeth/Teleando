@@ -17,8 +17,6 @@ export class HotelListService {
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             rating: 4.5,
             pricePerHour: 100,
-            availableRooms: 5,
-            amenities: ['WiFi', 'Pool', 'Gym'],
             isPopular: true
         },
         {
@@ -29,8 +27,6 @@ export class HotelListService {
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             rating: 4.8,
             pricePerHour: 90,
-            availableRooms: 4,
-            amenities: ['WiFi', 'Pool', 'Gym'],
             isPopular: true
         },
         {
@@ -41,8 +37,6 @@ export class HotelListService {
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             rating: 4,
             pricePerHour: 60,
-            availableRooms: 4,
-            amenities: ['WiFi'],
             isPopular: false
         },
         {
@@ -53,8 +47,6 @@ export class HotelListService {
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             rating: 4.1,
             pricePerHour: 70,
-            availableRooms: 5,
-            amenities: ['WiFi', 'Pool'],
             isPopular: false
         },
     ]
