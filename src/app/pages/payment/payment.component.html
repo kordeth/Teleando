@@ -1,1 +1,77 @@
-<p>payment works!</p>,
+<div class="container my-5">
+
+    <!-- Steps -->
+    <div class="d-flex justify-content-center align-items-center gap-4 mb-5">
+        <div class="step">1</div>
+        <div class="step active">2</div>
+        <div class="step">3</div>
+    </div>
+
+    <!-- Título principal -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Paga con tu tarjeta de crédito</h2>
+        <p class="text-muted small">Por favor, completa los datos para finalizar tu reserva</p>
+    </div>
+
+    <div class="row g-5">
+        <!-- Resumen de Pago -->
+        <div class="col-12 col-lg-5">
+          <div class="card shadow-sm p-4">
+            <h5 class="mb-3">Resumen de Pago</h5>
+            <div class="d-flex justify-content-between">
+              <span>Subtotal:</span>
+              <span><strong>S/ {{ totalPrice }}</strong></span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>IGV (18%):</span>
+              <span><strong>S/ {{ taxes }}</strong></span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <span>Total a pagar:</span>
+              <span class="text-primary fw-bold">S/ {{ totalPayment }}</span>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Formulario de Tarjeta -->
+        <div class="col-12 col-lg-7">
+          <form (ngSubmit)="submitPayment()" #paymentForm="ngForm" class="card shadow-sm p-4">
+    
+            <div class="mb-3">
+              <label class="form-label">Nombre en la tarjeta</label>
+              <input type="text" class="form-control" name="cardName" [(ngModel)]="payment.cardName" required>
+            </div>
+    
+            <div class="mb-3">
+              <label class="form-label">Número de tarjeta</label>
+              <input type="text" class="form-control" name="cardNumber" [(ngModel)]="payment.cardNumber" required maxlength="19">
+            </div>
+    
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Fecha de expiración</label>
+                <input type="text" class="form-control" name="expiry" placeholder="MM/AA" [(ngModel)]="payment.expiry" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">CVC</label>
+                <input type="text" class="form-control" name="cvc" [(ngModel)]="payment.cvc" required maxlength="4">
+              </div>
+            </div>
+    
+            <div class="d-flex flex-column gap-2 mt-4">
+  
+                <button type="submit" class="btn btn-primary w-100" [disabled]="!paymentForm.form.valid">
+                  Confirmar Pago
+                </button>
+              
+                <button type="button" class="btn btn-outline-secondary w-100" (click)="cancel()">
+                  Cancelar
+                </button>
+              
+              </div>
+    
+          </form>
+        </div>
+
+</div>

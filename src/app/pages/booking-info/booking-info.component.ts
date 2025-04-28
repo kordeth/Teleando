@@ -50,12 +50,24 @@ export class BookingInfoComponent {
   }
 
   submitForm() {
-    console.log(this.form);
-    // Redireccionar al siguiente paso
-    // this.router.navigate(['/checkout/confirmation']);
+    this.router.navigate(['/payment'], {
+      state: {
+        booking: {
+          selectedDate: this.selectedDate,
+          selectedHours: this.selectedHours,
+          name: this.name,
+          location: this.location,
+          image: this.image,
+          pricePerHour: this.pricePerHour,
+          totalPrice: this.totalPrice
+        },
+        userInfo: this.form
+      }
+    });
   }
 
   cancel() {
     this.router.navigate(['/']);
   }
+  
 }

@@ -43,7 +43,7 @@ export class HotelBookingCardComponent {
     }
   }
 
-  goToCheckout(): void {
+  goToBooking(): void {
     this.router.navigate(['/booking'], {
       state: {
         selectedDate: this.selectedDate,
