@@ -1,1 +1,35 @@
-<p>hotel-item works!</p>,
+<div class="card" style="width: 18rem;">
+
+    <div class="position-relative">
+        <img [src]="item().image" alt="{{ item().name }}" class="hotel-image">
+        
+        <div *ngIf="item().isPopular" class="popular-badge">
+          Más <span class="fw-light">popular</span>
+        </div>
+      </div>
+  
+    <div class="card-body">
+  
+      <!-- Encabezado: Nombre + Precio -->
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        <h5 class="card-title mb-0">{{ item().name }}</h5>
+        <small class="text-primary fw-bold" style="white-space: nowrap;">S/ {{ item().pricePerHour }} /h</small>
+      </div>
+  
+      <!-- Sub encabezado: Ubicación + Rating -->
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <p class="card-text mb-0">{{ item().location }}</p>
+        <small class="text-muted">⭐ {{ item().rating }} / 5</small>
+      </div>
+  
+      <!-- Descripción -->
+      <p class="card-text text-muted small">{{ item().description | slice: 0:70 }} ...</p>
+  
+      <!-- Botón Reservar -->
+      <div class="d-grid mt-3">
+        <a href="#" class="btn btn-primary btn-sm">Reservar</a>
+      </div>
+  
+    </div>
+  
+  </div>

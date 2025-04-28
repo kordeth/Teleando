@@ -5,10 +5,11 @@ import { OfferModel } from '@models/home-model';
 import { MostPopularModel } from '@models/home-model';
 import { HomeService } from '@services/home/home.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [HotelCardComponent, HotelOfferCardComponent, CommonModule],
+  imports: [HotelCardComponent, HotelOfferCardComponent, CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,26 +19,26 @@ import { CommonModule } from '@angular/common';
       height: 500px;
     }
   `,
-  
+
 })
-export class HomeComponent { 
+export class HomeComponent {
   offers: OfferModel[] = [];
   populars: MostPopularModel[] = [];
-  
+
   constructor(
     private homeService: HomeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.homeService.getCurrentOffers().subscribe(
       (data) => {
         this.offers = data;
       });
-      this.homeService.getMostPopular().subscribe(
-        (data) => {
-          this.populars = data;
-        }
-      );
+    this.homeService.getMostPopular().subscribe(
+      (data) => {
+        this.populars = data;
+      }
+    );
   }
-  
+
 }

@@ -1,1 +1,7 @@
-<p>hotel-list works!</p>,
+<section class="container my-5">
+    <div class="row g-4">
+      <div *ngFor="let item of list" class="col-12 col-md-6 col-lg-4">
+        <hotel-item [item]="item"></hotel-item>
+      </div>
+    </div>
+  </section>

@@ -3,8 +3,9 @@
         <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
             <h1 class="hero-title">Olvida el estrés,<br>reserva tu espacio ideal</h1>
             <p class="hero-subtitle">Disfruta unas horas de descanso<br>o momentos especiales.<br>¡Reserva ahora!</p>
-            <button class="btn btn-primary btn-hero mt-3">Reservar ahora</button>
-
+            <button class="btn btn-primary btn-hero mt-3" [routerLink]="'/hotels'">
+                Reservar ahora
+              </button>
             <div class="d-flex gap-4 mt-5 justify-content-center justify-content-md-start">
                 <div class="stat-item text-center text-md-start">
                     <img src="assets/icons/ic_traveler.svg" alt="Huéspedes" width="32">
@@ -35,7 +36,6 @@
 <section class="container my-5">
     <h2 class="mb-4">Recomendados</h2>
     <div class="d-flex overflow-auto flex-nowrap gap-3 pb-2">
-        <!-- <hotel-card></hotel-card> -->
         <div *ngFor="let popular of populars" class="flex-shrink-0" style="width: 250px;">
             <hotel-card [popular]="popular"></hotel-card>
           </div>

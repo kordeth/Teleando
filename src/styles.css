@@ -15,10 +15,22 @@ body {
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     transition: background-color 0.3s ease;
-  }
-  
-  .btn-primary:hover {
-    background-color:  var(--hover-primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-primary-color);
     border-color: var(--hover-primary-color);
+}
+
+.popular-badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background-color: #f64f77;
+    color: white;
+    font-weight: bold;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   }
-  
