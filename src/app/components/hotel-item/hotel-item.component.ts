@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HotelItemModel } from '@models/hotel-item';
 import { RouterModule } from '@angular/router';
 
+
+
 @Component({
   selector: 'hotel-item',
   imports: [CommonModule, RouterModule],

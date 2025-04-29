@@ -1,3 +1,6 @@
+
+
+
 <div class="card" style="width: 18rem;">
     <div class="position-relative">
         <img [src]="item().image" alt="{{ item().name }}" class="hotel-image">
@@ -15,7 +18,7 @@
             <p class="card-text mb-0">{{ item().location }}</p>
             <small class="text-muted">⭐ {{ item().rating }} / 5</small>
         </div>
-        <p class="card-text text-muted small">{{ item().description | slice: 0:70 }} ...</p>
+        <p class="card-text text-muted small">{{ item().description | slice: 0:70 }}</p>
         <div class="d-grid mt-3">
             <a class="btn btn-primary btn-sm" [routerLink]="['/hotel', item().id]" >Reservar</a>
         </div>

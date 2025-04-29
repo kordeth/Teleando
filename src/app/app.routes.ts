@@ -6,6 +6,7 @@ import { SuccessComponent } from '@pages/success/success.component';
 import { HotelListComponent } from '@pages/hotel-list/hotel-list.component';
 import { HotelDetailComponent } from '@pages/hotel-detail/hotel-detail.component';
 
+
 export const routes: Routes = [
     {
         path: '',

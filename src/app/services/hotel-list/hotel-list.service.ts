@@ -11,42 +11,42 @@ export class HotelListService {
     list: HotelItemModel[] = [
         {
             id: 1,
-            name: 'Hotel 1',
-            location: 'Location 1',
+            name: 'Gran Hotel Imperial',
+            location: 'San Bartolo, Lima',
             image: 'assets/hotels/items/item-1.svg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            description: 'Un hotel de lujo, donde la elegancia clásica se combina con el confort moderno',
             rating: 4.5,
-            pricePerHour: 100,
+            pricePerHour: 80,
             isPopular: true
         },
         {
             id: 2,
-            name: 'Hotel 2',
-            location: 'Location 2',
+            name: 'Costa Dorada',
+            location: 'Punta Hermosa, Lima',
             image: 'assets/hotels/items/item-2.svg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            description: 'Un lugar único con encanto histórico.',
             rating: 4.8,
-            pricePerHour: 90,
+            pricePerHour: 49,
             isPopular: true
         },
         {
             id: 3,
-            name: 'Hotel 3',
-            location: 'Location 3',
+            name: 'La Isla',
+            location: 'San Bartolo, Lima',
             image: 'assets/hotels/items/item-3.svg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            description: 'Disfruta frente al océano en un ambiente relajado y acogedor',
             rating: 4,
-            pricePerHour: 60,
+            pricePerHour: 35,
             isPopular: false
         },
         {
             id: 4,
-            name: 'Hotel 4',
-            location: 'Location 4',
+            name: 'Garden Inn',
+            location: 'Asia, Lima',
             image: 'assets/hotels/items/item-4.svg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            description: 'Rodeado de naturaleza, este refugio ofrece tranquilidad absoluta.',
             rating: 4.1,
-            pricePerHour: 70,
+            pricePerHour: 35,
             isPopular: false
         },
     ]

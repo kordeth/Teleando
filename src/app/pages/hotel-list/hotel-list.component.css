@@ -1,3 +1,80 @@
-:host {
-  display: block;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.contenedor {
+  display: flex;
+  width: 100%;  /* 100% del ancho de la ventana */
+  height: 100%;
+}
+
+.columna-busqueda, .columna-mapa {
+  flex: 1;
+  box-sizing: border-box;
+  max-height: 90vh;
+}
+
+.columna-busqueda {
+  display: flex;
+  flex-direction: column;
+   /* Altura máxima de la columna de búsqueda */
+}
+
+.fila {
+  flex: 1;
+  border-bottom: 1px solid #ccc; /* Opcional: líneas entre filas */
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+}
+
+.fila:last-child {
+  border-bottom: none; /* Quita la línea en la última fila */
+}
+
+.fila-titulo{
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  text-align: left;
+}
+
+.fila-hoteles{
+  grid-area: form;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    align-items: center;
+    padding-bottom: 40px;
+    gap: 25px;
+    overflow-y: auto;
+}
+
+.columna-mapa {
+  display: flex;
+  flex-direction: column;
+}
+
+google-map {
+  flex: 1;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .contenedor {
+    flex-direction: column;
+  }
+  .columna-mapa {
+    display: none; /* Ocultamos columna mapa */
+  }
+  .mapa-en-movil {
+    display: flex;
+    height: 1500px; /* puedes cambiar a 40vh si prefieres */
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
 }
