@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-booking-info',
-  imports: [ FormsModule, RouterModule ],
+  imports: [ FormsModule, RouterModule, CommonModule ],
   templateUrl: './booking-info.component.html',
   styleUrl: './booking-info.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,6 +20,7 @@ export class BookingInfoComponent {
   image: string = '';
   pricePerHour: number = 0;
   totalPrice: number = 0;
+  rangeFormatted: string = '';
   form = {
     firstName: '',
     lastName: '',
@@ -36,6 +38,7 @@ export class BookingInfoComponent {
       image: string;
       pricePerHour: number;
       totalPrice: number;
+      rangeFormatted: string;
     };
 
     if (state) {
@@ -46,6 +49,7 @@ export class BookingInfoComponent {
       this.image = state.image;
       this.pricePerHour = state.pricePerHour;
       this.totalPrice = state.totalPrice;
+      this.rangeFormatted = state.rangeFormatted;
     }
   }
 

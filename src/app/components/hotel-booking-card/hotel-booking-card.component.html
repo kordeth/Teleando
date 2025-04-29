@@ -3,14 +3,7 @@
     <h3 class="fw-bold text-success">
         S/ {{ detail().pricePerHour }} <small class="text-muted">por hora</small>
     </h3>
-    <div class="my-4">
-        <label class="form-label small text-muted">¿Cuántas horas quieres reservar?</label>
-        <div class="d-flex align-items-center justify-content-center gap-2">
-            <button (click)="decrement()" class="btn btn-danger btn-sm px-3">-</button>
-            <span class="fw-bold">{{ hours }} horas</span>
-            <button (click)="increment()" class="btn btn-success btn-sm px-3">+</button>
-        </div>
-    </div>
+    <hour-range-picker (hoursChanged)="onHoursChanged($event)" (hasError)="onErrorChanged($event)" (rangeFormatted)="onRangeFormatted($event)"></hour-range-picker>
     <div class="mb-4">
         <label class="form-label small text-muted">Elige una fecha</label>
         <div class="input-group">
@@ -18,9 +11,14 @@
         </div>
     </div>
 
-    <p class="small text-muted mb-4">
-        Pagarás <strong class="text-dark">S/ {{ totalPrice }}</strong> por <strong class="text-dark">{{ hours }}
-            horas</strong>
-    </p>
-    <button class="btn btn-primary w-100" (click)="goToBooking()">Reservar ahora</button>
+    <div *ngIf="!errorInHourPicker">
+        <p  class="small text-muted mb-4">
+            Pagarás <strong class="text-dark">S/ {{ totalPrice }}</strong> por
+            <strong class="text-dark">{{ hours }}</strong> hora(s)
+        </p>
+        <p class="small text-muted mb-4">
+            El precio no incluye IGV (18%). El total a pagar se calculará al finalizar la reserva.
+        </p>
+    </div>
+    <button class="btn btn-primary w-100" [disabled]="errorInHourPicker" (click)="goToBooking()">Reservar ahora</button>
 </div>

@@ -1,24 +1,25 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-payment',
-  imports: [ FormsModule ],
+  imports: [FormsModule, CommonModule],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaymentComponent { 
+export class PaymentComponent {
   hotelName: string = '';
   hotelLocation: string = '';
   hotelImage: string = '';
   customerName: string = '';
   customerEmail: string = '';
   customerPhone: string = '';
-  totalPrice: number = 0;
-  taxes: number = 0;
-  totalPayment: number = 0;
+  totalPrice: string = '0.00';
+  taxes: string = '0.00';
+  totalPayment: string = '0.00';
   payment = {
     cardName: '',
     cardNumber: '',
@@ -45,19 +46,17 @@ export class PaymentComponent {
         phone: string;
       };
     };
-  
+
     if (state) {
       this.hotelName = state.booking.name;
       this.hotelLocation = state.booking.location;
       this.hotelImage = state.booking.image;
-      this.totalPrice = state.booking.totalPrice;
-      this.taxes = state.booking.totalPrice * 0.18;
-      this.totalPayment = state.booking.totalPrice * 1.18;
+      this.totalPrice = state.booking.totalPrice.toFixed(2);
+      this.taxes = (state.booking.totalPrice * 0.18).toFixed(2);
+      this.totalPayment = (state.booking.totalPrice * 1.18).toFixed(2);
       this.customerName = `${state.userInfo.firstName} ${state.userInfo.lastName}`;
       this.customerEmail = state.userInfo.email;
       this.customerPhone = state.userInfo.phone;
-      console.log('Datos de reserva:', state.booking);
-      console.log('Datos del usuario:', state.userInfo);
     }
   }
 

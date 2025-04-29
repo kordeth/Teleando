@@ -1,46 +1,48 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 import { HotelDetailModel } from '@models/hotel-detail';
 import { RouterModule, Router } from '@angular/router';
+import { HourRangePickerComponent } from '@components/hour-range-picker/hour-range-picker.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'hotel-booking-card',
-  imports: [ FormsModule, RouterModule ],
+  standalone: true,
+  imports: [FormsModule, RouterModule, HourRangePickerComponent, CommonModule],
   templateUrl: './hotel-booking-card.component.html',
   styleUrl: './hotel-booking-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HotelBookingCardComponent {
-  
+
   detail = input.required<HotelDetailModel>();
+
   selectedDate: string = '';
   today: string = '';
-
-  hours: number = 3;
+  errorInHourPicker = false;
+  hours: number = 0;
+  rangeFormatted: string = '';
 
   constructor(private router: Router) {
     const now = new Date();
-    this.today = now.toISOString().split('T')[0];
+    this.today = now.toLocaleDateString('en-CA');; // Formato YYYY-MM-DD
     this.selectedDate = this.today;
   }
 
-  readonly minHours: number = 3;
-  readonly maxHours: number = 12; 
+  onErrorChanged(hasError: boolean) {
+    this.errorInHourPicker = hasError;
+  }
 
   get totalPrice(): number {
     return this.detail().pricePerHour * this.hours;
   }
 
-  increment(): void {
-    if (this.hours < this.maxHours) {
-      this.hours++;
-    }
+  onHoursChanged(newHours: number): void {
+    this.hours = newHours;
   }
 
-  decrement(): void {
-    if (this.hours > this.minHours) {
-      this.hours--;
-    }
+  onRangeFormatted(range: string): void {
+    this.rangeFormatted = range;
   }
 
   goToBooking(): void {
@@ -52,9 +54,10 @@ export class HotelBookingCardComponent {
         location: this.detail().location,
         image: this.detail().images[1],
         pricePerHour: this.detail().pricePerHour,
-        totalPrice: this.totalPrice
+        totalPrice: this.totalPrice,
+        rangeFormatted: this.rangeFormatted
       }
     });
   }
 
- }
+}

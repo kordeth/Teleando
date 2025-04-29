@@ -11,15 +11,12 @@ export class HotelDetailService {
     detail: HotelDetailModel[] = [
         {
             id: 1,
-            name: 'Hotel 1',
-            location: 'Lima, Peru',
-            description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat.`,
-            pricePerHour: 50,
+            name: 'Gran Hotel Imperial',
+            location: 'San Bartolo, Lima',
+            description: `Un hotel de lujo, donde la elegancia clásica se combina con el confort moderno`,
+            pricePerHour: 80,
             images: [
-                'assets/detail/detail-1.svg',
+                'assets/hotels/items/item-1.svg',
                 'assets/detail/detail-2.svg',
                 'assets/detail/detail-3.svg',
             ],

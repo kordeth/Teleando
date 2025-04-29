@@ -24,6 +24,7 @@ html, body {
 
 .fila {
   flex: 1;
+  margin-right: 20px; /* Espacio entre columnas */
   border-bottom: 1px solid #ccc; /* Opcional: líneas entre filas */
   background-color: #f0f0f0;
   display: flex;

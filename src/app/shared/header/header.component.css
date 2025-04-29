@@ -13,6 +13,10 @@
   color: var(--primary-color);
 }
 
+.navbar-nav .nav-link.disabled {
+  color: gray
+}
+
 .active-link {
   color: var(--primary-color) !important;
 }

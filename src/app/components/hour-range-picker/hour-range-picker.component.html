@@ -1,0 +1,22 @@
+<div class="d-flex gap-4">
+  
+    <!-- Hora de llegada -->
+    <mat-form-field appearance="fill">
+      <mat-label>Hora de llegada</mat-label>
+      <input matInput [formControl]="startControl" [matTimepicker]="startPicker">
+      <mat-timepicker-toggle matIconSuffix [for]="startPicker"></mat-timepicker-toggle>
+      <mat-timepicker #startPicker></mat-timepicker>
+    </mat-form-field>
+  
+    <!-- Hora de salida -->
+    <mat-form-field appearance="fill">
+      <mat-label>Hora de salida</mat-label>
+      <input matInput [formControl]="endControl" [matTimepicker]="endPicker">
+      <mat-timepicker-toggle matIconSuffix [for]="endPicker"></mat-timepicker-toggle>
+      <mat-timepicker #endPicker></mat-timepicker>
+    </mat-form-field>
+
+</div>
+<div *ngIf="errorMessage" class="text-danger small mb-2">
+    {{ errorMessage }}
+</div>
