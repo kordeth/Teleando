@@ -26,7 +26,7 @@ export class HourRangePickerComponent implements OnInit {
 
   @Output() hoursChanged = new EventEmitter<number>();
   @Output() hasError = new EventEmitter<boolean>();
-  @Output() rangeFormatted = new EventEmitter<string>(); // 🔥 Nuevo output
+  @Output() rangeFormatted = new EventEmitter<string>();
 
   startControl!: FormControl<Date | null>;
   endControl!: FormControl<Date | null>;
@@ -70,14 +70,14 @@ export class HourRangePickerComponent implements OnInit {
             this.errorMessage = 'La hora de salida debe ser posterior a la de llegada.';
             this.hasError.emit(true);
           }
-          this.correctEndTime(start);
+          // this.correctEndTime(start);
           return;
         } else if (diffHours < 1) {
           if (this.initialized) {
             this.errorMessage = 'La reserva mínima es de 1 hora.';
             this.hasError.emit(true);
           }
-          this.correctEndTime(start);
+          // this.correctEndTime(start);
           return;
         } else {
           if (this.initialized) {
@@ -89,8 +89,6 @@ export class HourRangePickerComponent implements OnInit {
 
       const finalHours = Math.max(diffHours, 0);
       this.hoursChanged.emit(finalHours);
-
-      // 🔥 Formatear y emitir el rango horario
       const formatted = `${this.formatHour(start)} - ${this.formatHour(end)}`;
       this.rangeFormatted.emit(formatted);
     }

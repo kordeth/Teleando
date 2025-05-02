@@ -7,4 +7,10 @@ export interface HotelItemModel {
     pricePerHour: number;
     rating: number;
     isPopular: boolean;
+    position: HotelPositionModel;
+}
+
+export interface HotelPositionModel {
+    latitude: number;
+    longitude: number;
 }

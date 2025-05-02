@@ -17,7 +17,11 @@ export class HotelListService {
             description: 'Un hotel de lujo, donde la elegancia clásica se combina con el confort moderno',
             rating: 4.5,
             pricePerHour: 80,
-            isPopular: true
+            isPopular: true,
+            position: {
+                latitude: -12.386125,
+                longitude: -76.776057
+            }
         },
         {
             id: 2,
@@ -27,7 +31,11 @@ export class HotelListService {
             description: 'Un lugar único con encanto histórico.',
             rating: 4.8,
             pricePerHour: 49,
-            isPopular: true
+            isPopular: true,
+            position: {
+                latitude: -12.309120,
+                longitude: -76.795136
+            }
         },
         {
             id: 3,
@@ -37,7 +45,11 @@ export class HotelListService {
             description: 'Disfruta frente al océano en un ambiente relajado y acogedor',
             rating: 4,
             pricePerHour: 35,
-            isPopular: false
+            isPopular: false,
+            position: {
+                latitude: -12.391228,
+                longitude: -76.776851
+            }
         },
         {
             id: 4,
@@ -47,7 +59,11 @@ export class HotelListService {
             description: 'Rodeado de naturaleza, este refugio ofrece tranquilidad absoluta.',
             rating: 4.1,
             pricePerHour: 35,
-            isPopular: false
+            isPopular: false,
+            position: {
+                latitude: -12.786194,
+                longitude: -76.556476
+            }
         },
     ]
 
