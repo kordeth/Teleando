@@ -1,24 +1,46 @@
 <div class="card shadow-sm p-4 rounded-4">
-    <h6 class="text-muted mb-2">Inicar reserva</h6>
+    <h6 class="text-muted mb-2">Iniciar reserva</h6>
+  
     <h3 class="fw-bold text-success">
-        S/ {{ detail().pricePerHour }} <small class="text-muted">por hora</small>
+      S/ {{ detail().pricePerHour }} <small class="text-muted">por hora</small>
     </h3>
-    <hour-range-picker (hoursChanged)="onHoursChanged($event)" (hasError)="onErrorChanged($event)" (rangeFormatted)="onRangeFormatted($event)"></hour-range-picker>
+  
+    <!-- Hora -->
+    <hour-range-picker
+      [availableStartHour]="availableStartHour"
+      [availableEndHour]="availableEndHour"
+      (hoursChanged)="onHoursChanged($event)"
+      (hasError)="onErrorChanged($event)"
+      (rangeFormatted)="onRangeFormatted($event)">
+    </hour-range-picker>
+  
+    <!-- Fecha -->
     <div class="mb-4">
         <label class="form-label small text-muted">Elige una fecha</label>
-        <div class="input-group">
-            <input type="date" class="form-control" [(ngModel)]="selectedDate" [min]="today" [value]="today" />
-        </div>
-    </div>
-
+        <select
+          class="form-select"
+          [(ngModel)]="selectedDate"
+          (change)="onDateChange($any($event.target).value)">
+          <option *ngFor="let date of availableDates" [value]="date">
+            {{ date | date:'dd/MM/yyyy' }}
+          </option>
+        </select>
+      </div>
+  
+    <!-- Precio total -->
     <div *ngIf="!errorInHourPicker">
-        <p  class="small text-muted mb-4">
-            Pagarás <strong class="text-dark">S/ {{ totalPrice }}</strong> por
-            <strong class="text-dark">{{ hours }}</strong> hora(s)
-        </p>
-        <p class="small text-muted mb-4">
-            El precio no incluye IGV (18%). El total a pagar se calculará al finalizar la reserva.
-        </p>
+      <p class="small text-muted mb-4">
+        Pagarás <strong class="text-dark">S/ {{ totalPrice }}</strong> por
+        <strong class="text-dark">{{ hours }}</strong> hora(s)
+      </p>
+      <p class="small text-muted mb-4">
+        El precio no incluye IGV (18%). El total a pagar se calculará al finalizar la reserva.
+      </p>
     </div>
-    <button class="btn btn-primary w-100" [disabled]="errorInHourPicker" (click)="goToBooking()">Reservar ahora</button>
-</div>
+  
+    <button class="btn btn-primary w-100"
+            [disabled]="errorInHourPicker"
+            (click)="goToBooking()">
+      Reservar ahora
+    </button>
+  </div>

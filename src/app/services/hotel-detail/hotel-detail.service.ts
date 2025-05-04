@@ -33,6 +33,15 @@ export class HotelDetailService {
                 { icon: 'safe', label: 'Caja de seguridad' },
                 { icon: 'room-service', label: 'Servicio a la habitación' },
                 { icon: 'clock', label: 'Check-in flexible' }
+            ],
+            availability: [
+                { date: '2025-05-04', startHour: 9, endHour: 18 },
+                { date: '2025-05-05', startHour: 17, endHour: 21 },
+                { date: '2025-05-06', startHour: 12, endHour: 18 },
+                { date: '2025-05-07', startHour: 16, endHour: 18 },
+                { date: '2025-05-08', startHour: 9, endHour: 18 },
+                { date: '2025-05-09', startHour: 9, endHour: 17 },
+                { date: '2025-05-10', startHour: 9, endHour: 15 }
             ]
         }
     ]

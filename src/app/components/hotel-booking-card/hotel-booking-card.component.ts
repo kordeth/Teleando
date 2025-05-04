@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnInit, Signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HotelDetailModel } from '@models/hotel-detail';
+import { HotelDetailModel, DayAvailability } from '@models/hotel-detail';
 import { RouterModule, Router } from '@angular/router';
 import { HourRangePickerComponent } from '@components/hour-range-picker/hour-range-picker.component';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './hotel-booking-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HotelBookingCardComponent {
+export class HotelBookingCardComponent implements OnInit {
 
   detail = input.required<HotelDetailModel>();
 
@@ -22,11 +22,41 @@ export class HotelBookingCardComponent {
   errorInHourPicker = false;
   hours: number = 0;
   rangeFormatted: string = '';
+  minDate: string = '';
+
+  availableDates: string[] = [];
+  availableStartHour: number = 0;
+  availableEndHour: number = 0;
 
   constructor(private router: Router) {
     const now = new Date();
-    this.today = now.toLocaleDateString('en-CA');; // Formato YYYY-MM-DD
+    this.today = now.toLocaleDateString('en-CA');
     this.selectedDate = this.today;
+  }
+
+  ngOnInit(): void {
+    const availability = this.detail().availability;
+    this.availableDates = availability.map(d => d.date);
+    if (this.availableDates.includes(this.today)) {
+      this.selectedDate = this.today;
+    } else {
+      this.selectedDate = this.availableDates[0];
+    }
+    this.minDate = this.availableDates[0];
+    this.updateHourRange(this.selectedDate);
+  }
+
+  updateHourRange(date: string): void {
+    const match = this.detail().availability.find(d => d.date === date);
+    if (match) {
+      this.availableStartHour = match.startHour;
+      this.availableEndHour = match.endHour;
+    }
+  }
+
+  onDateChange(date: string): void {
+    this.selectedDate = date;
+    this.updateHourRange(date);
   }
 
   onErrorChanged(hasError: boolean) {
@@ -59,5 +89,4 @@ export class HotelBookingCardComponent {
       }
     });
   }
-
 }
