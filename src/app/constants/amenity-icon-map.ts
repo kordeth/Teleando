@@ -10,5 +10,8 @@ export const AMENITY_ICON_MAP: { [key: string]: string } = {
     desk: 'bi-journal',
     safe: 'bi-lock-fill',
     'room-service': 'bi-bell-fill',
-    clock: 'bi-clock-fill'
+    clock: 'bi-clock-fill',
+    fan: 'bi-fan',
+    jacuzzi: 'bi-water',
+    balcony: 'bi-house-door',
 };

@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+.chip-selected {
+  background-color: #D6E4FF !important;
+}

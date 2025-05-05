@@ -22,7 +22,7 @@
           <img [src]="image" alt="Hotel" class="card-img-top rounded-4" style="height: 280px; object-fit: cover;">
           <div class="card-body text-start">
             <h5 class="card-title mb-1">{{ name }}</h5>
-            <p class="text-muted small">{{ location }}</p>
+            <p class="text-muted small">Habitación {{ roomType }}</p>
             <p class="fw-bold"> S/ {{ totalPrice }} <span class="small text-muted">por {{ selectedHours }} hora(s) </span></p>
             <p class="fw-bold">Día: {{ selectedDate }} <span class="small text-muted"> | {{ rangeFormatted }}  </span> </p>
           </div>

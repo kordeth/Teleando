@@ -1,21 +1,28 @@
+export interface RoomAvailability {
+  date: string;
+  startHour: number;
+  endHour: number;
+}
+
+export interface Amenity {
+  icon: string;
+  label: string;
+}
+
+export interface HotelRoom {
+  id: number;
+  type: string; // Ej: Básica, Estándar, Premium
+  description: string;
+  pricePerHour: number;
+  images: string[];
+  amenities: Amenity[];
+  availability: RoomAvailability[];
+}
+
 export interface HotelDetailModel {
-    id: number;
-    name: string;
-    location: string;
-    description: string;
-    pricePerHour: number;
-    images: string[];
-    amenities: AmenityModel[];
-    availability: DayAvailability[]; // Opcional, puede no estar presente
-  }
-
-  export interface AmenityModel {
-    icon: string;
-    label: string;
-  }
-
-  export interface DayAvailability {
-    date: string;        // "YYYY-MM-DD"
-    startHour: number;   // Ej. 9
-    endHour: number;     // Ej. 18
-  }
+  id: number;
+  name: string;
+  location: string;
+  description: string;
+  rooms: HotelRoom[];
+}

@@ -16,7 +16,7 @@ export class BookingInfoComponent {
   selectedDate: string = '';
   selectedHours: number = 0;
   name: string = '';
-  location: string = '';
+  roomType: string = '';
   image: string = '';
   pricePerHour: number = 0;
   totalPrice: number = 0;
@@ -34,7 +34,7 @@ export class BookingInfoComponent {
       selectedDate: string;
       selectedHours: number;
       name: string;
-      location: string;
+      roomType: string;
       image: string;
       pricePerHour: number;
       totalPrice: number;
@@ -45,7 +45,7 @@ export class BookingInfoComponent {
       this.selectedDate = state.selectedDate;
       this.selectedHours = state.selectedHours;
       this.name = state.name;
-      this.location = state.location;
+      this.roomType = state.roomType;
       this.image = state.image;
       this.pricePerHour = state.pricePerHour;
       this.totalPrice = state.totalPrice;
@@ -60,7 +60,7 @@ export class BookingInfoComponent {
           selectedDate: this.selectedDate,
           selectedHours: this.selectedHours,
           name: this.name,
-          location: this.location,
+          roomType: this.roomType,
           image: this.image,
           pricePerHour: this.pricePerHour,
           totalPrice: this.totalPrice

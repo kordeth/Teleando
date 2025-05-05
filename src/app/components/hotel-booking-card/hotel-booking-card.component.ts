@@ -1,28 +1,37 @@
-import { ChangeDetectionStrategy, Component, input, OnInit, Signal, computed } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HotelDetailModel, DayAvailability } from '@models/hotel-detail';
 import { RouterModule, Router } from '@angular/router';
-import { HourRangePickerComponent } from '@components/hour-range-picker/hour-range-picker.component';
 import { CommonModule } from '@angular/common';
+import { HourRangePickerComponent } from '@components/hour-range-picker/hour-range-picker.component';
+import { HotelRoom } from '@models/hotel-detail';
 
 @Component({
   selector: 'hotel-booking-card',
-  standalone: true,
   imports: [FormsModule, RouterModule, HourRangePickerComponent, CommonModule],
   templateUrl: './hotel-booking-card.component.html',
   styleUrl: './hotel-booking-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HotelBookingCardComponent implements OnInit {
 
-  detail = input.required<HotelDetailModel>();
+export class HotelBookingCardComponent implements OnChanges {
+
+  @Input() name!: string;
+  detail = input.required<HotelRoom>();
 
   selectedDate: string = '';
   today: string = '';
+  minDate: string = '';
   errorInHourPicker = false;
   hours: number = 0;
   rangeFormatted: string = '';
-  minDate: string = '';
+  roomType: string = '';
 
   availableDates: string[] = [];
   availableStartHour: number = 0;
@@ -34,16 +43,15 @@ export class HotelBookingCardComponent implements OnInit {
     this.selectedDate = this.today;
   }
 
-  ngOnInit(): void {
-    const availability = this.detail().availability;
-    this.availableDates = availability.map(d => d.date);
-    if (this.availableDates.includes(this.today)) {
-      this.selectedDate = this.today;
-    } else {
-      this.selectedDate = this.availableDates[0];
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['detail'] && this.detail()) {
+      const availability = this.detail().availability;
+      const todayIsAvailable = this.availableDates.includes(this.today);
+      this.availableDates = availability.map(d => d.date);
+      this.selectedDate = todayIsAvailable ? this.today : this.availableDates[0];
+      this.minDate = this.availableDates[0];
+      this.updateHourRange(this.selectedDate);
     }
-    this.minDate = this.availableDates[0];
-    this.updateHourRange(this.selectedDate);
   }
 
   updateHourRange(date: string): void {
@@ -80,12 +88,13 @@ export class HotelBookingCardComponent implements OnInit {
       state: {
         selectedDate: this.selectedDate,
         selectedHours: this.hours,
-        name: this.detail().name,
-        location: this.detail().location,
+        type: this.detail().type,
         image: this.detail().images[1],
         pricePerHour: this.detail().pricePerHour,
         totalPrice: this.totalPrice,
-        rangeFormatted: this.rangeFormatted
+        rangeFormatted: this.rangeFormatted,
+        name: this.name,
+        roomType: this.detail().type
       }
     });
   }

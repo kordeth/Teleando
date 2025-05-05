@@ -16,7 +16,7 @@
   
     <!-- Fecha -->
     <div class="mb-4">
-        <label class="form-label small text-muted">Elige una fecha</label>
+        <label class="form-label small text-muted text-start d-block">Elige una fecha</label>
         <select
           class="form-select"
           [(ngModel)]="selectedDate"
@@ -29,12 +29,9 @@
   
     <!-- Precio total -->
     <div *ngIf="!errorInHourPicker">
-      <p class="small text-muted mb-4">
+      <p class="small text-muted text-start mb-4">
         Pagarás <strong class="text-dark">S/ {{ totalPrice }}</strong> por
         <strong class="text-dark">{{ hours }}</strong> hora(s)
-      </p>
-      <p class="small text-muted mb-4">
-        El precio no incluye IGV (18%). El total a pagar se calculará al finalizar la reserva.
       </p>
     </div>
   
