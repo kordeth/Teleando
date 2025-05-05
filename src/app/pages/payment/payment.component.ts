@@ -51,9 +51,9 @@ export class PaymentComponent {
       this.hotelName = state.booking.name;
       this.hotelLocation = state.booking.location;
       this.hotelImage = state.booking.image;
-      this.totalPrice = state.booking.totalPrice.toFixed(2);
-      this.taxes = (state.booking.totalPrice * 0.18).toFixed(2);
-      this.totalPayment = (state.booking.totalPrice * 1.18).toFixed(2);
+      this.totalPrice = (state.booking.totalPrice / 1.18).toFixed(2);
+      this.taxes = (state.booking.totalPrice - (state.booking.totalPrice / 1.18)).toFixed(2);
+      this.totalPayment = (state.booking.totalPrice).toFixed(2);
       this.customerName = `${state.userInfo.firstName} ${state.userInfo.lastName}`;
       this.customerEmail = state.userInfo.email;
       this.customerPhone = state.userInfo.phone;
