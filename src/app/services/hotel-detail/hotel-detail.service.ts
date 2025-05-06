@@ -49,7 +49,7 @@ export class HotelDetailService {
               { icon: 'tv', label: 'TV pantalla plana' }
             ],
             availability: [
-              { date: '2025-05-04', startHour: 10, endHour: 20 }
+              { date: '2025-05-08', startHour: 10, endHour: 20 }
             ]
           },
           {

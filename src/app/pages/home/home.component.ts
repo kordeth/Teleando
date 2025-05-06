@@ -41,4 +41,14 @@ export class HomeComponent {
     );
   }
 
+  goToOffers() { 
+    console.log('Go to offers');
+    // TODO: Implement navigation to offers page
+  }
+
+  goToRecommendations() {
+    console.log('Go to recommendations');
+    // TODO: Implement navigation to recommendations page
+  }
+
 }

@@ -4,7 +4,8 @@ import {
   input,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  effect
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
@@ -41,6 +42,17 @@ export class HotelBookingCardComponent implements OnChanges {
     const now = new Date();
     this.today = now.toLocaleDateString('en-CA');
     this.selectedDate = this.today;
+  
+    effect(() => {
+      const room = this.detail();
+      if (room) {
+        this.availableDates = room.availability.map(d => d.date);
+        const todayIsAvailable = this.availableDates.includes(this.today);
+        this.selectedDate = todayIsAvailable ? this.today : this.availableDates[0];
+        this.minDate = this.availableDates[0];
+        this.updateHourRange(this.selectedDate);
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
