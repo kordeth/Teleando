@@ -5,12 +5,11 @@ import { HotelItemModel } from '@models/hotel-item';
 import { HotelPositionModel } from '@models/hotel-item';
 import { HotelItemComponent } from '@components/hotel-item/hotel-item.component';
 import { HotelListService } from '@services/hotel-list/hotel-list.service';
-import { GoogleMapComponent} from '@components/google-map/google-map.component';
 import { GoogleMap, MapAdvancedMarker, GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   selector: 'hotel-list',
-  imports: [ FormsModule, HotelItemComponent, CommonModule, GoogleMapComponent, GoogleMap, GoogleMapsModule, MapAdvancedMarker],
+  imports: [ HotelItemComponent, CommonModule, GoogleMap, GoogleMapsModule, MapAdvancedMarker, FormsModule],
   templateUrl: './hotel-list.component.html',
   styleUrl: './hotel-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

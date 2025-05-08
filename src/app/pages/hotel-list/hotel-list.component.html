@@ -1,14 +1,17 @@
 <div class="contenedor">
   <div class="columna-busqueda">
-    <div class="fila-titulo"> Busqueda por ubicación </div>
+    <div class="fila-titulo"> Busca tu lugar ideal </div>
 
     <div class="fila">
       <input type="text"
              class="form-control"
              placeholder="Ingresa un distrito o nombre"
+             aria-label="Search" 
+             aria-describedby="basic-addon1"
              [(ngModel)]="searchQuery"
              (input)="filtrarHoteles()">
       <button class="btn btn-primary" type="button" (click)="filtrarHoteles()">Buscar</button>
+
     </div>
 
     <div class="mapa-en-movil">
@@ -19,16 +22,13 @@
         [zoom]="zoom2">
         <map-marker 
           *ngFor="let item of filteredList"
-          [position]="convertToLatLngLiteral(item.position)"
-          [label]="item.name">
+          [position]="convertToLatLngLiteral(item.position)">
         </map-marker>
       </google-map>
     </div>
 
-    <div class="fila-hoteles grid">
-      <div *ngFor="let item of filteredList" style="margin-bottom: 10px;">
-        <hotel-item [item]="item"></hotel-item>
-      </div>
+    <div class="grid-hoteles">
+      <hotel-item *ngFor="let item of filteredList" [item]="item"></hotel-item>
     </div>
   </div>
 
@@ -46,13 +46,3 @@
     </google-map>
   </div>
 </div>
-<!-- <section class="container my-5" >
-    <div class="sidebar" >
-      <div *ngFor="let item of list" [ngStyle]="{'margin-bottom': '10px'}">
-        <hotel-item [item]="item"></hotel-item>
-      </div>
-    </div>
-
-    <app-google-map></app-google-map>>
-   
-</section> -->

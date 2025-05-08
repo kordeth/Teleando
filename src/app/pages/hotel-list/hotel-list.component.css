@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -7,13 +6,11 @@ body {
 
 .contenedor {
   display: flex;
-  width: 100%;
-  /* 100% del ancho de la ventana */
+  width: 100%;  /* 100% del ancho de la ventana */
   height: 100%;
 }
 
-.columna-busqueda,
-.columna-mapa {
+.columna-busqueda, .columna-mapa {
   flex: 1;
   box-sizing: border-box;
   max-height: 90vh;
@@ -22,26 +19,23 @@ body {
 .columna-busqueda {
   display: flex;
   flex-direction: column;
-  /* Altura máxima de la columna de búsqueda */
+   /* Altura máxima de la columna de búsqueda */
 }
 
 .fila {
   flex: 1;
-  margin-right: 20px;
-  /* Espacio entre columnas */
-  border-bottom: 1px solid #ccc;
-  /* Opcional: líneas entre filas */
+  margin-right: 20px; /* Espacio entre columnas */
+  border-bottom: 1px solid #ccc; /* Opcional: líneas entre filas */
   background-color: #f0f0f0;
   display: flex;
   justify-content: center;
 }
 
 .fila:last-child {
-  border-bottom: none;
-  /* Quita la línea en la última fila */
+  border-bottom: none; /* Quita la línea en la última fila */
 }
 
-.fila-titulo {
+.fila-titulo{
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
@@ -50,15 +44,18 @@ body {
   text-align: left;
 }
 
-.fila-hoteles {
-  grid-area: form;
-  display: flex;
-  flex-direction: column;
-  padding-top: 30px;
-  align-items: center;
-  padding-bottom: 40px;
-  gap: 25px;
+.grid-hoteles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* adaptable a pantallas */
+  gap: 20px;
+  padding: 30px 20px 40px;
+  justify-items: center;
   overflow-y: auto;
+}
+
+.hotel-card {
+  width: 100%;
+  max-width: 300px;
 }
 
 .columna-mapa {
@@ -75,16 +72,12 @@ google-map {
   .contenedor {
     flex-direction: column;
   }
-
   .columna-mapa {
-    display: none;
-    /* Ocultamos columna mapa */
+    display: none; /* Ocultamos columna mapa */
   }
-
   .mapa-en-movil {
     display: flex;
-    height: 1500px;
-    /* puedes cambiar a 40vh si prefieres */
+    height: 1500px; /* puedes cambiar a 40vh si prefieres */
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
   }
