@@ -4,7 +4,8 @@ export interface HotelItemModel {
     location: string;
     description: string;
     image: string;
-    pricePerHour: number;
+    minPricePerHour: number;
+    currency: string;
     rating: number;
     isPopular: boolean;
     position: HotelPositionModel;

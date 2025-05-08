@@ -3,24 +3,20 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { BookingInfoModel } from '@models/booking-info-model';
+import { BookingInfoService } from '@services/booking-info/booking-info.service';
 
 @Component({
   selector: 'app-booking-info',
-  imports: [ FormsModule, RouterModule, CommonModule ],
+  imports: [FormsModule, RouterModule, CommonModule],
   templateUrl: './booking-info.component.html',
   styleUrl: './booking-info.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class BookingInfoComponent { 
-  selectedDate: string = '';
-  selectedHours: number = 0;
-  name: string = '';
-  roomType: string = '';
-  image: string = '';
-  pricePerHour: number = 0;
-  totalPrice: number = 0;
-  rangeFormatted: string = '';
+export class BookingInfoComponent {
+
+  data!: BookingInfoModel;
   form = {
     firstName: '',
     lastName: '',
@@ -28,50 +24,23 @@ export class BookingInfoComponent {
     phone: ''
   };
 
-  constructor(private router: Router) {
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as {
-      selectedDate: string;
-      selectedHours: number;
-      name: string;
-      roomType: string;
-      image: string;
-      pricePerHour: number;
-      totalPrice: number;
-      rangeFormatted: string;
-    };
-
-    if (state) {
-      this.selectedDate = state.selectedDate;
-      this.selectedHours = state.selectedHours;
-      this.name = state.name;
-      this.roomType = state.roomType;
-      this.image = state.image;
-      this.pricePerHour = state.pricePerHour;
-      this.totalPrice = state.totalPrice;
-      this.rangeFormatted = state.rangeFormatted;
-    }
+  constructor(
+    private router: Router,
+    private bookingInfoService: BookingInfoService
+  ) { }
+  
+  ngOnInit(): void {
+    this.bookingInfoService.getBookingInfo().subscribe(response => {
+      this.data = response;
+    });
   }
 
   submitForm() {
-    this.router.navigate(['/payment'], {
-      state: {
-        booking: {
-          selectedDate: this.selectedDate,
-          selectedHours: this.selectedHours,
-          name: this.name,
-          roomType: this.roomType,
-          image: this.image,
-          pricePerHour: this.pricePerHour,
-          totalPrice: this.totalPrice
-        },
-        userInfo: this.form
-      }
-    });
+    this.router.navigate(['/payment'])
   }
 
   cancel() {
     this.router.navigate(['/']);
   }
-  
+
 }

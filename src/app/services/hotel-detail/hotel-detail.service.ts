@@ -19,6 +19,7 @@ export class HotelDetailService {
             type: 'Básica',
             description: 'Habitación cómoda con servicios esenciales.',
             pricePerHour: 50,
+            currency: 'PEN',
             images: [
                 'assets/hotels/rooms/basic-1.svg',
                 'assets/hotels/items/item-1.svg'
@@ -39,6 +40,7 @@ export class HotelDetailService {
             type: 'Estándar',
             description: 'Un espacio ideal para estancias más cómodas.',
             pricePerHour: 80,
+            currency: 'PEN',
             images: [
                 'assets/hotels/rooms/standard-1.svg',
                 'assets/hotels/items/item-1.svg'
@@ -57,6 +59,7 @@ export class HotelDetailService {
             type: 'Premium',
             description: 'Lujo y comodidad con vista al mar.',
             pricePerHour: 120,
+            currency: 'PEN',
             images: [
                 'assets/hotels/rooms/premium-1.svg',
                 'assets/hotels/items/item-1.svg'

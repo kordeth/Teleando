@@ -14,6 +14,7 @@ export interface HotelRoom {
   type: string; // Ej: Básica, Estándar, Premium
   description: string;
   pricePerHour: number;
+  currency: string;
   images: string[];
   amenities: Amenity[];
   availability: RoomAvailability[];

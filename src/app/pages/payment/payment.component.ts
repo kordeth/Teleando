@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PrePaymentModel } from '@models/prepayment-model';
+import { PrePaymentService } from '@services/prepayment/prepayment.service';
 
 @Component({
   selector: 'app-payment',
@@ -11,15 +13,8 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaymentComponent {
-  hotelName: string = '';
-  hotelLocation: string = '';
-  hotelImage: string = '';
-  customerName: string = '';
-  customerEmail: string = '';
-  customerPhone: string = '';
-  totalPrice: string = '0.00';
-  taxes: string = '0.00';
-  totalPayment: string = '0.00';
+
+  data!: PrePaymentModel
   payment = {
     cardName: '',
     cardNumber: '',
@@ -27,40 +22,21 @@ export class PaymentComponent {
     cvc: ''
   };
 
-  constructor(private router: Router) {
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as {
-      booking: {
-        selectedDate: string;
-        selectedHours: number;
-        name: string;
-        location: string;
-        image: string;
-        pricePerHour: number;
-        totalPrice: number;
-      };
-      userInfo: {
-        firstName: string;
-        lastName: string;
-        email: string;
-        phone: string;
-      };
-    };
+  constructor(
+    private router: Router,
+    private prePaymentService: PrePaymentService
+  ) { }
 
-    if (state) {
-      this.hotelName = state.booking.name;
-      this.hotelLocation = state.booking.location;
-      this.hotelImage = state.booking.image;
-      this.totalPrice = (state.booking.totalPrice / 1.18).toFixed(2);
-      this.taxes = (state.booking.totalPrice - (state.booking.totalPrice / 1.18)).toFixed(2);
-      this.totalPayment = (state.booking.totalPrice).toFixed(2);
-      this.customerName = `${state.userInfo.firstName} ${state.userInfo.lastName}`;
-      this.customerEmail = state.userInfo.email;
-      this.customerPhone = state.userInfo.phone;
-    }
+  ngOnInit(): void {
+    this.prePaymentService.getPrepaymentInfo().subscribe(response => {
+      this.data = response;
+    });
   }
 
   submitPayment() {
+    // TODO: Implement payment processing logic with a simple encryptation
+    // For now, we will just log the payment data
+    console.log('Payment data:', this.payment);
     this.router.navigate(['/success'])
   }
 

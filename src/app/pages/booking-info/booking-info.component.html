@@ -19,12 +19,12 @@
       <!-- Imagen Hotel + Info -->
       <div class="col-12 col-lg-5 text-center text-lg-start">
         <div class="card border-0 shadow-sm">
-          <img [src]="image" alt="Hotel" class="card-img-top rounded-4" style="height: 280px; object-fit: cover;">
+          <img [src]="data.image" alt="Hotel" class="card-img-top rounded-4" style="height: 280px; object-fit: cover;">
           <div class="card-body text-start">
-            <h5 class="card-title mb-1">{{ name }}</h5>
-            <p class="text-muted small">Habitación {{ roomType }}</p>
-            <p class="fw-bold"> S/ {{ totalPrice }} <span class="small text-muted">por {{ selectedHours }} hora(s) </span></p>
-            <p class="fw-bold">Día: {{ selectedDate }} <span class="small text-muted"> | {{ rangeFormatted }}  </span> </p>
+            <h5 class="card-title mb-1">{{ data.name }} - {{ data.location }}</h5>
+            <p class="text-muted small">Habitación {{ data.roomType }}</p>
+            <p class="fw-bold"> S/ {{ data.totalPrice }} <span class="small text-muted">por {{ data.selectedHours }} hora(s) </span></p>
+            <p class="fw-bold">Día: {{ data.selectedDate }} <span class="small text-muted"> | {{ data.rangeFormatted }}  </span> </p>
           </div>
         </div>
       </div>

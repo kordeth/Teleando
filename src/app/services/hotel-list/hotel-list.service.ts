@@ -16,7 +16,8 @@ export class HotelListService {
             image: 'assets/hotels/items/item-1.svg',
             description: 'Un hotel de lujo, donde la elegancia clásica se combina con el confort moderno',
             rating: 4.5,
-            pricePerHour: 80,
+            minPricePerHour: 80,
+            currency: 'PEN',
             isPopular: true,
             position: {
                 latitude: -12.386125,
@@ -30,7 +31,8 @@ export class HotelListService {
             image: 'assets/hotels/items/item-2.svg',
             description: 'Un lugar único con encanto histórico.',
             rating: 4.8,
-            pricePerHour: 49,
+            minPricePerHour: 49,
+            currency: 'PEN',
             isPopular: true,
             position: {
                 latitude: -12.309120,
@@ -44,7 +46,8 @@ export class HotelListService {
             image: 'assets/hotels/items/item-3.svg',
             description: 'Disfruta frente al océano en un ambiente relajado y acogedor',
             rating: 4,
-            pricePerHour: 35,
+            minPricePerHour: 35,
+            currency: 'PEN',
             isPopular: false,
             position: {
                 latitude: -12.391228,
@@ -58,7 +61,8 @@ export class HotelListService {
             image: 'assets/hotels/items/item-4.svg',
             description: 'Rodeado de naturaleza, este refugio ofrece tranquilidad absoluta.',
             rating: 4.1,
-            pricePerHour: 35,
+            minPricePerHour: 35,
+            currency: 'PEN',
             isPopular: false,
             position: {
                 latitude: -12.786194,
