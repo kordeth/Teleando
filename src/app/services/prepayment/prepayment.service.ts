@@ -12,7 +12,7 @@ export class PrePaymentService {
         transactionId: '123456789',
         amount: 203.39,
         taxes: 36.61,
-        totalAmount: 240,
+        totalAmount: 240.00,
         currency: 'PEN',
         customerName: 'Juan',
         customerLastName: 'Pérez',
@@ -27,8 +27,8 @@ export class PrePaymentService {
             roomType: 'Estándar',
             image: 'assets/hotels/items/item-1.svg',
             pricePerHour: 80,
-            totalPrice: 240,
-            rangeFormatted: '10:00 - 13:00',
+            totalPrice: 240.00,
+            rangeFormatted: '10:00 AM  - 01:00 PM',
             currency: 'PEN',
         }
 
