@@ -40,8 +40,7 @@
       [zoom]="zoom">
       <map-marker 
         *ngFor="let item of filteredList"
-        [position]="convertToLatLngLiteral(item.position)"
-        [label]="item.name">
+        [position]="convertToLatLngLiteral(item.position)">
       </map-marker>
     </google-map>
   </div>
