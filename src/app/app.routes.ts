@@ -5,6 +5,8 @@ import { PaymentComponent } from '@pages/payment/payment.component';
 import { SuccessComponent } from '@pages/success/success.component';
 import { HotelListComponent } from '@pages/hotel-list/hotel-list.component';
 import { HotelDetailComponent } from '@pages/hotel-detail/hotel-detail.component';
+import { LoginComponent } from '@pages/login/login.component';
+import { RegisterComponent } from '@pages/register/register.component';
 
 
 export const routes: Routes = [
@@ -32,6 +34,12 @@ export const routes: Routes = [
         path: 'success',
         component: SuccessComponent
     },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {   path: 'register', 
+        component: RegisterComponent },
     {
         path: '**',
         component: HomeComponent
