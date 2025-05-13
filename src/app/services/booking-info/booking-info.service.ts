@@ -14,7 +14,7 @@ export class BookingInfoService {
         name: 'Gran Hotel Imperial',
         location: 'San Bartolo, Lima',
         roomType: 'Estándar',
-        image: 'assets/hotels/items/item-1.svg',
+        image: 'assets/hotels-mock/items/item-1.svg',
         pricePerHour: 80,
         totalPrice: 240,
         rangeFormatted: '10:00 - 13:00',

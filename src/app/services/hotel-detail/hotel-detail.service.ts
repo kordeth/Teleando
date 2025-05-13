@@ -21,8 +21,8 @@ export class HotelDetailService {
             pricePerHour: 50,
             currency: 'PEN',
             images: [
-                'assets/hotels/rooms/basic-1.svg',
-                'assets/hotels/items/item-1.svg'
+                'assets/hotels-mock/rooms/basic-1.svg',
+                'assets/hotels-mock/items/item-1.svg'
             ],
             amenities: [
               { icon: 'bed', label: 'Cama individual' },
@@ -42,8 +42,8 @@ export class HotelDetailService {
             pricePerHour: 80,
             currency: 'PEN',
             images: [
-                'assets/hotels/rooms/standard-1.svg',
-                'assets/hotels/items/item-1.svg'
+                'assets/hotels-mock/rooms/standard-1.svg',
+                'assets/hotels-mock/items/item-1.svg'
             ],
             amenities: [
               { icon: 'bed', label: 'Cama Queen' },
@@ -61,8 +61,8 @@ export class HotelDetailService {
             pricePerHour: 120,
             currency: 'PEN',
             images: [
-                'assets/hotels/rooms/premium-1.svg',
-                'assets/hotels/items/item-1.svg'
+                'assets/hotels-mock/rooms/premium-1.svg',
+                'assets/hotels-mock/items/item-1.svg'
             ],
             amenities: [
               { icon: 'bed', label: 'Cama King' },

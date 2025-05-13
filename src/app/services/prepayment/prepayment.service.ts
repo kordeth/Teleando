@@ -25,7 +25,7 @@ export class PrePaymentService {
             name: 'Gran Hotel Imperial',
             location: 'San Bartolo, Lima',
             roomType: 'Estándar',
-            image: 'assets/hotels/items/item-1.svg',
+            image: 'assets/hotels-mock/items/item-1.svg',
             pricePerHour: 80,
             totalPrice: 240.00,
             rangeFormatted: '10:00 AM  - 01:00 PM',
