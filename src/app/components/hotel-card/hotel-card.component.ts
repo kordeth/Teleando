@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './hotel-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class HotelCardComponent { 
-  popular = input.required<MostPopularModel>();
+  popular = input.required<MostPopularModel>(); 
 }

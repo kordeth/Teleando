@@ -6,10 +6,11 @@ import { MostPopularModel } from '@models/home-model';
 import { HomeService } from '@services/home/home.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [HotelCardComponent, HotelOfferCardComponent, CommonModule, RouterModule],
+  imports: [NgFor, HotelCardComponent, HotelOfferCardComponent, CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,33 +23,46 @@ import { RouterModule } from '@angular/router';
 
 })
 export class HomeComponent {
-  offers: OfferModel[] = [];
-  populars: MostPopularModel[] = [];
+  // offers: OfferModel[] = [];
+  // populars: MostPopularModel[] = [];
 
   constructor(
     private homeService: HomeService
   ) { }
 
-  ngOnInit() {
-    this.homeService.getCurrentOffers().subscribe(
-      (data) => {
-        this.offers = data;
-      });
-    this.homeService.getMostPopular().subscribe(
-      (data) => {
-        this.populars = data;
-      }
-    );
+  ofertas: any = []
+  populares: any = []
+
+  __listar_Ofertas() {
+  this.homeService.listar_Ofertas_Populares().subscribe((rest: any) => {
+    this.ofertas = rest.data[0].ofertas;
+    console.log(this.ofertas);
+    });
   }
 
-  goToOffers() { 
-    console.log('Go to offers');
-    // TODO: Implement navigation to offers page
+  __listar_Populares() {
+    this.homeService.listar_Ofertas_Populares().subscribe((rest: any) => {
+      this.populares = rest.data[0].populares;
+      console.log(this.populares);
+    });
   }
 
-  goToRecommendations() {
-    console.log('Go to recommendations');
-    // TODO: Implement navigation to recommendations page
+  ngOnInit(): void {
+    this.__listar_Ofertas();
+    this.__listar_Populares();
   }
+
 
 }
+
+  // goToOffers() { 
+  //   console.log('Go to offers');
+  //   // TODO: Implement navigation to offers page
+  // }
+
+  // goToRecommendations() {
+  //   console.log('Go to recommendations');
+  //   // TODO: Implement navigation to recommendations page
+  // }
+
+// }
