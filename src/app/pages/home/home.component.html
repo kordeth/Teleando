@@ -25,17 +25,17 @@
         </div>
     </div>
 </section>
+
+
 <section class="container my-5 cursor-pointer" > 
     <!-- (click)="goToOffers()"  -->
     <h2 class="mb-4">Ofertas</h2>
     <div class="d-flex overflow-auto flex-nowrap gap-3 pb-2">
-        <div *ngFor="let offer of ofertas" class="flex-shrink-0" style="width: 250px;">
-            <hotel-offer-card [offer]="offer"></hotel-offer-card>
+        <div *ngFor="let o of ofertas" class="flex-shrink-0" style="width: 250px;">
+            <hotel-offer-card [offer]="o"></hotel-offer-card>
         </div>
     </div>
 </section>
-
-
 
 <section class="container my-5 cursor-pointer" >
     <!-- (click)="goToRecommendations()" -->

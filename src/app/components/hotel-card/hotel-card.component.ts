@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { MostPopularModel } from '@models/home-model';
+import { Oferta } from '@models/home-model';
 import { HomeService } from '@services/home/home.service';
 import { CommonModule } from '@angular/common';
 
@@ -13,5 +13,5 @@ import { CommonModule } from '@angular/common';
 })
 
 export class HotelCardComponent { 
-  popular = input.required<MostPopularModel>(); 
+  popular = input.required<Oferta>(); 
 }

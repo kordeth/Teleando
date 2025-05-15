@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HotelCardComponent } from "@components/hotel-card/hotel-card.component";
 import { HotelOfferCardComponent } from '@components/hotel-offer-card/hotel-offer-card.component';
-import { OfferModel } from '@models/home-model';
-import { MostPopularModel } from '@models/home-model';
 import { HomeService } from '@services/home/home.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgFor } from '@angular/common';
+import { HomeModel, Oferta } from '@models/home-model';
 
 @Component({
   selector: 'app-home',
@@ -23,35 +22,25 @@ import { NgFor } from '@angular/common';
 
 })
 export class HomeComponent {
-  // offers: OfferModel[] = [];
-  // populars: MostPopularModel[] = [];
 
   constructor(
     private homeService: HomeService
   ) { }
 
-  ofertas: any = []
-  populares: any = []
+  ofertas: Oferta[] = []
+  populares: Oferta[] = []
 
-  __listar_Ofertas() {
-  this.homeService.listar_Ofertas_Populares().subscribe((rest: any) => {
+  __getData() {
+  this.homeService.listar_Ofertas_Populares().subscribe((rest: HomeModel) => {
     this.ofertas = rest.data[0].ofertas;
+    this.populares = rest.data[0].populares;
     console.log(this.ofertas);
     });
   }
 
-  __listar_Populares() {
-    this.homeService.listar_Ofertas_Populares().subscribe((rest: any) => {
-      this.populares = rest.data[0].populares;
-      console.log(this.populares);
-    });
-  }
-
   ngOnInit(): void {
-    this.__listar_Ofertas();
-    this.__listar_Populares();
+    this.__getData();
   }
-
 
 }
 

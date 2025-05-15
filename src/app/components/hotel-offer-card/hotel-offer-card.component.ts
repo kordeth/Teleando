@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { OfferModel } from '@models/home-model';
+import { Oferta } from '@models/home-model';
 import { HomeService } from '@services/home/home.service';
 
 @Component({
@@ -10,5 +10,8 @@ import { HomeService } from '@services/home/home.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HotelOfferCardComponent {
-  offer = input.required<OfferModel>();
+  offer = input.required<Oferta>();
+  ngOnInit() {
+    console.log('Oferta recibida en el card:', this.offer());
+  }
 }
