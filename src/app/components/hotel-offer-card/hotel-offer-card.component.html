@@ -1,13 +1,13 @@
 <div class="hotel-card position-relative overflow-hidden rounded-4 shadow-sm">
-    <img [src]="offer().HotelImagen" alt="Hotel" class="hotel-image w-100 h-100 object-fit-cover">
-  
-    <div class="price-tag bg-pink text-white px-3 py-1 rounded-end">
-      {{ offer().descuento }}
-    </div>
-    <div class="hotel-gradient-overlay"></div>
-  
-    <div class="hotel-info text-white">
-      <h5 class="mb-0"> {{ offer().nombre }}</h5>
-      <small>{{ offer().distrito }}, {{offer().ciudad}}</small>
-    </div>
+  <img [src]="offer().HotelImagen" alt="Hotel" class="hotel-image w-100 h-100 object-fit-cover">
+
+  <div class="price-tag bg-pink text-white px-3 py-1 rounded-end">
+    {{ offer().descuento }}
   </div>
+  <div class="hotel-gradient-overlay"></div>
+
+  <div class="hotel-info text-white">
+    <h5 class="mb-0"> {{ offer().nombre }}</h5>
+    <small>{{ offer().distrito }}, {{offer().ciudad}}</small>
+  </div>
+</div>

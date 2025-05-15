@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { HotelCardComponent } from "@components/hotel-card/hotel-card.component";
 import { HotelOfferCardComponent } from '@components/hotel-offer-card/hotel-offer-card.component';
 import { HomeService } from '@services/home/home.service';
@@ -12,7 +12,6 @@ import { HomeModel, Oferta } from '@models/home-model';
   imports: [NgFor, HotelCardComponent, HotelOfferCardComponent, CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: `
     .swiper {
       width: 100%;
