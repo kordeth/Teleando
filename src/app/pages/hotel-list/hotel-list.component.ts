@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HotelItemModel } from '@models/hotel-item';
-import { HotelPositionModel } from '@models/hotel-item';
+import { HotelListModel} from '@models/hotel-item';
 import { HotelItemComponent } from '@components/hotel-item/hotel-item.component';
 import { HotelListService } from '@services/hotel-list/hotel-list.service';
 import { GoogleMap, MapAdvancedMarker, GoogleMapsModule } from '@angular/google-maps';
@@ -12,7 +12,6 @@ import { GoogleMap, MapAdvancedMarker, GoogleMapsModule } from '@angular/google-
   imports: [ HotelItemComponent, CommonModule, GoogleMap, GoogleMapsModule, MapAdvancedMarker, FormsModule],
   templateUrl: './hotel-list.component.html',
   styleUrl: './hotel-list.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class HotelListComponent {
@@ -20,25 +19,27 @@ export class HotelListComponent {
   filteredList: HotelItemModel[] = [];
   searchQuery: string = '';
 
-  center: google.maps.LatLngLiteral = { lat: -12.5581348, lng: -76.547841 };
-  center2: google.maps.LatLngLiteral = { lat: -12.5815826, lng: -76.6739182 };
+  center: google.maps.LatLngLiteral = { lat: -12.0455959, lng: -77.0322017 };
+  center2: google.maps.LatLngLiteral = { lat: -12.0472121, lng: -77.0412855 };
   height: number = 100;
   zoom: number = 11.04;
-  zoom2: number = 9.5;
+  zoom2: number = 11;
 
   constructor(private hotelListService: HotelListService) {}
 
+
   ngOnInit() {
-    this.hotelListService.getHotelList().subscribe(data => {
-      this.list = data;
-      this.filteredList = data;
+    this.hotelListService.getHotelList().subscribe((rest: HotelListModel) => {
+      this.list = rest.data;
+      this.filteredList = rest.data;
+      console.log(this.list);
     });
   }
 
-  convertToLatLngLiteral(position: HotelPositionModel): google.maps.LatLngLiteral {
+  convertToLatLngLiteral(lat: number, lng: number): google.maps.LatLngLiteral {
     return {
-      lat: position.latitude,
-      lng: position.longitude
+      lat: lat,
+      lng: lng
     };
   }
 
@@ -46,9 +47,9 @@ export class HotelListComponent {
     const query = this.searchQuery.toLowerCase().trim();
 
     this.filteredList = this.list.filter(item => {
-      const nombre = item.name.toLowerCase();
-      const lugar = item.location?.toLowerCase() || ''; // Asegúrate de tener esta propiedad
+      const nombre = item.nombre.toLowerCase();
+      const lugar = item.distrito?.toLowerCase() || ''; // Asegúrate de tener esta propiedad
       return nombre.includes(query) || lugar.includes(query);
     });
-  }
+  } 
 }

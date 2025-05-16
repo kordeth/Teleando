@@ -1,23 +1,23 @@
 <div class="card" style="width: 18rem;">
     <div class="position-relative">
-        <img [src]="item().image" alt="{{ item().name }}" class="hotel-image">
+        <img [src]="item().HotelImagen" alt="{{ item().nombre }}" class="hotel-image">
 
-        <div *ngIf="item().isPopular" class="popular-badge">
+        <!-- <div *ngIf="item().isPopular" class="popular-badge">
             Más <span class="fw-light">popular</span>
-        </div>
+        </div> -->
     </div>
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-1">
-            <h5 class="card-title mb-0">{{ item().name }}</h5>
-            <small class="text-primary fw-bold" style="white-space: nowrap;">S/ {{ item().minPricePerHour }} /h</small>
+            <h5 class="card-title mb-0">{{ item().nombre }}</h5>
+            <small class="text-primary fw-bold" style="white-space: nowrap;">S/ {{ item().precio}} /h</small>
         </div>
         <div class="d-flex justify-content-between align-items-center mb-2">
-            <p class="card-text mb-0">{{ item().location }}</p>
+            <p class="card-text mb-0">{{ item().distrito }}, {{ item().ciudad }}</p>
             <small class="text-muted">⭐ {{ item().rating }} / 5</small>
         </div>
-        <p class="card-text text-muted small">{{ item().description | slice: 0:70 }}</p>
+        <p class="card-text text-muted small">{{ item().descripcion | slice: 0:70 }}</p>
         <div class="d-grid mt-3">
-            <a class="btn btn-primary btn-sm" [routerLink]="['/hotel', item().id]" >Reservar</a>
+            <a class="btn btn-primary btn-sm" [routerLink]="['/hotel', item().idHotel]" >Reservar</a>
         </div>
     </div>
 </div>
