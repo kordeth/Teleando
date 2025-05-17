@@ -1,25 +1,25 @@
-<div class="alert alert-info py-2 px-3 small" role="alert">
-  Horario disponible: <strong>{{ availableHourRange }}</strong>
+<div class="btn-group mb-4" role="group">
+  <input type="radio" class="btn-check" name="pack" id="pack3h" value="3h" [checked]="selectedPack === '3'"
+    (change)="onPackChange('3h')">
+  <label class="btn btn-outline-primary" for="pack3h">3h</label>
+
+  <input type="radio" class="btn-check" name="pack" id="pack6h" value="6h" [checked]="selectedPack === '6'"
+    (change)="onPackChange('6h')">
+  <label class="btn btn-outline-primary" for="pack6h">6h</label>
+
+  <input type="radio" class="btn-check" name="pack" id="pack24h" value="24h" disabled>
+  <label class="btn btn-outline-primary disabled" for="pack24h">24h</label>
 </div>
 
-<div class="d-flex gap-4">
-  <!-- Hora de llegada -->
-  <mat-form-field appearance="fill">
-    <mat-label>Hora de llegada</mat-label>
-    <input matInput [formControl]="startControl" [matTimepicker]="startPicker">
-    <mat-timepicker-toggle matIconSuffix [for]="startPicker"></mat-timepicker-toggle>
-    <mat-timepicker #startPicker></mat-timepicker>
-  </mat-form-field>
+<!-- Selector de Hora de Entrada -->
+<mat-form-field appearance="outline" class="w-100">
+  <mat-label>Hora de entrada</mat-label>
+  <input 
+    matInput 
+    [formControl]="startControl" 
+    [matTimepicker]="startPicker" 
+    placeholder="Selecciona la hora">
 
-  <!-- Hora de salida -->
-  <mat-form-field appearance="fill">
-    <mat-label>Hora de salida</mat-label>
-    <input matInput [formControl]="endControl" [matTimepicker]="endPicker">
-    <mat-timepicker-toggle matIconSuffix [for]="endPicker"></mat-timepicker-toggle>
-    <mat-timepicker #endPicker></mat-timepicker>
-  </mat-form-field>
-</div>
-
-<div *ngIf="errorMessage" class="text-danger small mb-2">
-  {{ errorMessage }}
-</div>
+  <mat-timepicker-toggle matIconSuffix [for]="startPicker"></mat-timepicker-toggle>
+  <mat-timepicker #startPicker interval="1h"></mat-timepicker>
+</mat-form-field>

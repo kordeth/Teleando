@@ -6,13 +6,10 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { combineLatest } from 'rxjs';
-import {
-  MatTimepickerModule
-} from '@angular/material/timepicker';
+import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -20,122 +17,87 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'hour-range-picker',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatTimepickerModule,
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './hour-range-picker.component.html',
   styleUrl: './hour-range-picker.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HourRangePickerComponent implements OnInit, OnChanges {
+  @Input() selectedDate: Date = new Date();
+  @Output() packSelected = new EventEmitter<string>();
+  @Output() dateTimeSelected = new EventEmitter<Date>();
 
-  @Input() availableStartHour: number = 0;
-  @Input() availableEndHour: number = 23;
-
-  @Output() hoursChanged = new EventEmitter<number>();
-  @Output() hasError = new EventEmitter<boolean>();
-  @Output() rangeFormatted = new EventEmitter<string>();
-
+  selectedPack: string = '3';
   startControl = new FormControl<Date | null>(null);
-  endControl = new FormControl<Date | null>(null);
-  errorMessage: string | null = null;
-
-  private isCorrecting = false;
-  private initialized = false;
+  minTime: string = '';
 
   ngOnInit(): void {
-    combineLatest([
-      this.startControl.valueChanges,
-      this.endControl.valueChanges
-    ]).subscribe(() => this.calculateHours());
+    this.setInitialTime();
 
-    this.initialized = true;
+    this.startControl.valueChanges.subscribe((selectedTime) => {
+      if (selectedTime instanceof Date) {
+        this.emitSelectedDateTime(selectedTime);
+      }
+    });
+  }
+
+  onPackChange(value: string) {
+    const cleanValue = value.replace('h', '');
+    this.selectedPack = cleanValue;
+    this.packSelected.emit(cleanValue);
+  }
+
+  private setInitialTime(): void {
+    const now = new Date();
+    now.setHours(now.getHours() + 1, 0, 0, 0);
+    this.startControl.setValue(now, { emitEvent: false });
+    this.emitSelectedDateTime(now);
+  }
+
+  private emitSelectedDateTime(selectedTime: Date): void {
+    const combinedDateTime = new Date(this.selectedDate);
+    combinedDateTime.setHours(
+      selectedTime.getHours(),
+      selectedTime.getMinutes(),
+      0,
+      0
+    );
+    this.dateTimeSelected.emit(combinedDateTime);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes['availableStartHour'] ||
-      changes['availableEndHour']
-    ) {
-      this.setDefaultRange();
+    if (changes['selectedDate']) {
+      setTimeout(() => this.updateMinTime(), 0);
     }
   }
 
-  private setDefaultRange(): void {
-    const now = new Date();
-    const start = new Date(now.setHours(this.availableStartHour, 0, 0, 0));
-    const end = new Date(now.setHours(this.availableStartHour + 1, 0, 0, 0));
+  private updateMinTime(): void {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    this.startControl.setValue(new Date(start));
-    this.endControl.setValue(new Date(end));
-  }
+    const selected = new Date(this.selectedDate);
+    selected.setHours(0, 0, 0, 0);
 
-  private calculateHours(): void {
-    const start = this.startControl.value;
-    const end = this.endControl.value;
+    let minDateTime = new Date(this.selectedDate);
 
-    if (start && end) {
-      const startTime = start.getHours() + start.getMinutes() / 60;
-      const endTime = end.getHours() + end.getMinutes() / 60;
-      const diffHours = endTime - startTime;
-
-      // Validaciones
-      if (startTime < this.availableStartHour || endTime > this.availableEndHour) {
-        const startFormatted = this.formatHour(new Date().setHours(this.availableStartHour, 0, 0));
-        const endFormatted = this.formatHour(new Date().setHours(this.availableEndHour, 0, 0));
-        this.errorMessage = `Selecciona entre ${startFormatted} y ${endFormatted}`;
-        this.hasError.emit(true);
-        return;
-      }
-
-      if (!this.isCorrecting) {
-        if (startTime >= endTime) {
-          if (this.initialized) {
-            this.errorMessage = 'La hora de salida debe ser posterior a la de llegada.';
-            this.hasError.emit(true);
-          }
-          return;
-        } else if (diffHours < 1) {
-          if (this.initialized) {
-            this.errorMessage = 'La reserva mínima es de 1 hora.';
-            this.hasError.emit(true);
-          }
-          return;
-        } else {
-          if (this.initialized) {
-            this.errorMessage = null;
-            this.hasError.emit(false);
-          }
-        }
-      }
-
-      const finalHours = Math.max(diffHours, 0);
-      this.hoursChanged.emit(finalHours);
-      const formatted = `${this.formatHour(start)} - ${this.formatHour(end)}`;
-      this.rangeFormatted.emit(formatted);
+    if (selected.getTime() === today.getTime()) {
+      const now = new Date();
+      now.setHours(now.getHours() + 1, 0, 0, 0);
+      this.minTime = `${now.getHours().toString().padStart(2, '0')}:00`;
+      minDateTime = now;
+    } else {
+      this.minTime = '00:00';
+      minDateTime.setHours(0, 0, 0, 0);
     }
-  }
 
-  private formatHour(input: number | Date): string {
-    const date = typeof input === 'number' ? new Date(input) : input;
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const displayHours = hours % 12 || 12;
-    const displayMinutes = minutes.toString().padStart(2, '0');
-    return `${displayHours}:${displayMinutes} ${ampm}`;
+    this.startControl.setValue(minDateTime, { emitEvent: false });
+    this.emitSelectedDateTime(minDateTime);
   }
-
-  get availableHourRange(): string {
-    const start = this.formatHour(new Date().setHours(this.availableStartHour, 0, 0));
-    const end = this.formatHour(new Date().setHours(this.availableEndHour, 0, 0));
-    return `${start} - ${end}`;
-  }
-
 }

@@ -2,12 +2,13 @@
 
   <!-- Encabezado centrado -->
   <div class="text-center mb-5">
-    <h3 class="fw-bold">{{ hotel.name }}</h3>
-    <h6 class="text-muted">{{ hotel.location }}</h6>
+    <h3 class="fw-bold">{{ detail?.nombre }}</h3>
+    <h6 class="text-muted">{{ detail?.distrito }}, {{ detail?.ciudad}}</h6>
+    <h6 class="text-muted">{{ detail?.direccion}}</h6>
 
     <div class="d-flex justify-content-center mb-2">
       <mat-chip-set aria-label="Tipos de habitación disponibles">
-        <mat-chip *ngFor="let type of uniqueRoomTypes" [class.chip-selected]="selectedRoom.type === type"
+        <mat-chip *ngFor="let type of uniqueRoomTypes" [class.chip-selected]="selectedRoom?.nombre === type"
           (click)="onChipSelect(type)">
           {{ type }}
         </mat-chip>
@@ -17,24 +18,24 @@
     <!-- Contenedor de 2 columnas: Carrusel + Descripción / Booking + Amenities -->
     <div class="row g-5">
       <div class="col-12 col-lg-8">
-        <hotel-carousel [images]="selectedRoom.images"></hotel-carousel>
+        <hotel-carousel [images]="selectedRoomImage"></hotel-carousel>
         <div class="mt-4 text-start">
           <h5>Sobre la habitación</h5>
-          <p class="text-muted">{{ selectedRoom.description }}</p>
+          <p class="text-muted">{{ selectedRoom?.descripcion }}</p>
         </div>
       </div>
 
       <!-- Booking Card + Amenities -->
       <div class="col-12 col-lg-4">
-        <hotel-booking-card [name]="hotel.name" [detail]="selectedRoom">
+        <hotel-booking-card [hotel]="detail!" [roomSelected]="selectedRoomIndex">
         </hotel-booking-card>
 
         <div class="mt-4">
           <h6 class="fw-semibold text-start">Comodidades</h6>
           <div class="row row-cols-2 row-cols-md-3 g-3">
-            <div *ngFor="let amenity of selectedRoom.amenities" class="col text-center">
-              <i class="bi fs-4 text-primary mb-2" [ngClass]="amenityIconMap[amenity.icon]"></i>
-              <div class="small">{{ amenity.label }}</div>
+            <div *ngFor="let amenity of selectedRoom?.comodidades" class="col text-center">
+              <i class="bi fs-4 text-primary mb-2" [ngClass]="amenity.icon_Class"></i>
+              <div class="small">{{ amenityLabel[amenity.comodidadNombre] }}</div>
             </div>
           </div>
         </div>

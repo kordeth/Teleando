@@ -1,17 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  input,
   Input,
   OnChanges,
   SimpleChanges,
-  effect
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HourRangePickerComponent } from '@components/hour-range-picker/hour-range-picker.component';
-import { HotelRoom } from '@models/hotel-detail';
+import { input } from '@angular/core';
+import { HotelDetailModel } from '@models/hotel-detail';
+import { parse } from 'path';
 
 @Component({
   selector: 'hotel-booking-card',
@@ -20,94 +20,91 @@ import { HotelRoom } from '@models/hotel-detail';
   styleUrl: './hotel-booking-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+export class HotelBookingCardComponent {
 
-export class HotelBookingCardComponent implements OnChanges {
+  hotel = input.required<HotelDetailModel>();
+  roomSelected = input.required<number>();
 
-  @Input() name!: string;
-  detail = input.required<HotelRoom>();
-
-  selectedDate: string = '';
-  today: string = '';
-  minDate: string = '';
+  // selectedDate: Date = new Date();
   errorInHourPicker = false;
-  hours: number = 0;
-  rangeFormatted: string = '';
-  roomType: string = '';
+  hours: number = 3;
+  selectedPack: string = '';
 
-  availableDates: string[] = [];
-  availableStartHour: number = 0;
-  availableEndHour: number = 0;
+  selectedDate: Date = new Date();
+  minDate: string = '';
+  formattedSelectedDate: string = '';
 
-  constructor(private router: Router) {
-    const now = new Date();
-    this.today = now.toLocaleDateString('en-CA');
-    this.selectedDate = this.today;
-  
-    effect(() => {
-      const room = this.detail();
-      if (room) {
-        this.availableDates = room.availability.map(d => d.date);
-        const todayIsAvailable = this.availableDates.includes(this.today);
-        this.selectedDate = todayIsAvailable ? this.today : this.availableDates[0];
-        this.minDate = this.availableDates[0];
-        this.updateHourRange(this.selectedDate);
-      }
-    });
+  selectedRooms: number = 1;
+  availableRooms: number[] = [];
+
+  constructor(private router: Router) { }
+
+  handleDateTimeSelected(dateTime: Date) {
+    console.log('Fecha y hora seleccionada:', dateTime);
+    // Aquí ya tienes un Date completo con fecha y hora combinadas.
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['detail'] && this.detail()) {
-      const availability = this.detail().availability;
-      const todayIsAvailable = this.availableDates.includes(this.today);
-      this.availableDates = availability.map(d => d.date);
-      this.selectedDate = todayIsAvailable ? this.today : this.availableDates[0];
-      this.minDate = this.availableDates[0];
-      this.updateHourRange(this.selectedDate);
-    }
+  handlePackSelection(selectedValue: string) {
+    console.log('Pack seleccionado (número):', selectedValue);
+    this.hours = parseInt(selectedValue, 10);
   }
 
-  updateHourRange(date: string): void {
-    const match = this.detail().availability.find(d => d.date === date);
-    if (match) {
-      this.availableStartHour = match.startHour;
-      this.availableEndHour = match.endHour;
-    }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes['detail'] && this.detail()) {
+  //     const availability = this.detail().availability.map((d: { date: string }) => new Date(d.date));
+  //     const today = new Date();
+
+  //     const todayAvailable = availability.some(date => this.isSameDay(date, today));
+  //     this.selectedDate = todayAvailable ? today : availability[0] || today;
+  //   }
+  // }
+
+  // selectRooms(count: number): void {
+  //   this.selectedRooms = count;
+  // }
+
+  ngOnInit(): void {
+    const today = new Date();
+    this.minDate = this.formatDate(today);
+    this.selectedDate = today;
+    this.formattedSelectedDate = this.formatDate(today); // Formato correcto para input
   }
 
-  onDateChange(date: string): void {
-    this.selectedDate = date;
-    this.updateHourRange(date);
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`
   }
 
-  onErrorChanged(hasError: boolean) {
+  onDateChange(event: any): void {
+    const [year, month, day] = event.target.value.split('-').map(Number);
+    this.selectedDate = new Date(year, month - 1, day); // Hora local, sin desfase de zona
+  }
+
+  onErrorChanged(hasError: boolean): void {
     this.errorInHourPicker = hasError;
   }
 
+  get pricePerHour(): number {
+    const hotel = this.hotel?.();
+    const roomIndex = this.roomSelected?.();
+  
+    if (!hotel || roomIndex === undefined || !hotel.tipoHabitacion[roomIndex]) {
+      return 0; 
+    }
+  
+    return hotel.tipoHabitacion[roomIndex].precio;
+  }
+
   get totalPrice(): number {
-    return this.detail().pricePerHour * this.hours;
-  }
-
-  onHoursChanged(newHours: number): void {
-    this.hours = newHours;
-  }
-
-  onRangeFormatted(range: string): void {
-    this.rangeFormatted = range;
+    // convertir a 2 decimales
+    const total = this.pricePerHour * this.hours;
+    return Math.round(total * 100) / 100;
   }
 
   goToBooking(): void {
-    this.router.navigate(['/booking'], {
-      state: {
-        selectedDate: this.selectedDate,
-        selectedHours: this.hours,
-        type: this.detail().type,
-        image: this.detail().images[1],
-        pricePerHour: this.detail().pricePerHour,
-        totalPrice: this.totalPrice,
-        rangeFormatted: this.rangeFormatted,
-        name: this.name,
-        roomType: this.detail().type
-      }
-    });
+    this.router.navigate(['/booking']);
   }
+
 }

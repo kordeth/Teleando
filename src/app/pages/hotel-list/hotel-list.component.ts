@@ -6,6 +6,7 @@ import { HotelListModel} from '@models/hotel-item';
 import { HotelItemComponent } from '@components/hotel-item/hotel-item.component';
 import { HotelListService } from '@services/hotel-list/hotel-list.service';
 import { GoogleMap, MapAdvancedMarker, GoogleMapsModule } from '@angular/google-maps';
+import { LoaderService } from '@services/loader/loader.service';
 
 @Component({
   selector: 'hotel-list',
@@ -25,11 +26,12 @@ export class HotelListComponent {
   zoom: number = 11.04;
   zoom2: number = 11;
 
-  constructor(private hotelListService: HotelListService) {}
-
+  constructor(private hotelListService: HotelListService, private loaderService: LoaderService) {}
 
   ngOnInit() {
+    this.loaderService.show()
     this.hotelListService.getHotelList().subscribe((rest: HotelListModel) => {
+      this.loaderService.hide()
       this.list = rest.data;
       this.filteredList = rest.data;
       console.log(this.list);
@@ -48,7 +50,7 @@ export class HotelListComponent {
 
     this.filteredList = this.list.filter(item => {
       const nombre = item.nombre.toLowerCase();
-      const lugar = item.distrito?.toLowerCase() || ''; // Asegúrate de tener esta propiedad
+      const lugar = item.distrito?.toLowerCase() || '';
       return nombre.includes(query) || lugar.includes(query);
     });
   } 

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { HomeModel } from '@models/home-model';
+import { environment } from 'src/environments/environment';
+
+const baseUrl = environment.baseUrl;
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +17,7 @@ export class HomeService {
     ){}
 
     listar_Ofertas_Populares(): Observable<HomeModel> {
-        return this.http.get<HomeModel>('https://acgjo5022j.execute-api.us-east-1.amazonaws.com/v1/home', {responseType: 'json'});
+        return this.http.get<HomeModel>(`${baseUrl}/home`, {responseType: 'json'});
     }
 
 }

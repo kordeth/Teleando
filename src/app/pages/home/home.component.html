@@ -31,8 +31,8 @@
     <!-- (click)="goToOffers()"  -->
     <h2 class="mb-4">Ofertas</h2>
     <div class="d-flex overflow-auto flex-nowrap gap-3 pb-2">
-        <div *ngFor="let o of ofertas" class="flex-shrink-0" style="width: 250px;">
-            <hotel-offer-card [offer]="o"></hotel-offer-card>
+        <div *ngFor="let offer of ofertas" class="flex-shrink-0" style="width: 250px;">
+            <hotel-offer-card [offer]="offer" (click) = "goToDetail(offer.idHotel)"></hotel-offer-card>
         </div>
     </div>
 </section>
@@ -42,7 +42,7 @@
     <h2 class="mb-4">Recomendados</h2>
     <div class="d-flex overflow-auto flex-nowrap gap-3 pb-2">
         <div *ngFor="let popular of populares" class="flex-shrink-0" style="width: 250px;">
-            <hotel-card [popular]="popular"></hotel-card>
+            <hotel-card [popular]="popular" (click) = "goToDetail(popular.idHotel)"></hotel-card>
         </div>
     </div>
 </section>
