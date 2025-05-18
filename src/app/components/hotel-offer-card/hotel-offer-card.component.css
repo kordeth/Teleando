@@ -5,6 +5,7 @@
 .hotel-card {
   height: 300px;
   position: relative;
+  cursor: pointer;
 }
 
 .hotel-image {

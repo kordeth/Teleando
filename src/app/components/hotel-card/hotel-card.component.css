@@ -9,6 +9,7 @@
 .popular-hotel-card {
   height: 200px;
   position: relative;
+  cursor: pointer;
 }
 
 .hotel-image {
