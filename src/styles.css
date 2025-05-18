@@ -22,6 +22,22 @@ body {
     border-color: var(--hover-primary-color);
 }
 
+.btn-secondary {
+    background-color: white;
+    border-color: var(--primary-color);
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: white;
+    color: var(--hover-primary-color); /* Cambia el color del texto */
+    border-color: var(--hover-primary-color); /* Opcional: cambia también el borde */
+}
+
 .popular-badge {
     position: absolute;
     top: 0.5rem;

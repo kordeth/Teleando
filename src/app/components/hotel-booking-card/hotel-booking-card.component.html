@@ -7,37 +7,39 @@
 
   <div class="mb-3">
     <label class="form-label small text-muted d-block text-start" for="datePicker">Elige una fecha</label>
-    <input 
-      type="date" 
-      class="form-control" 
-      id="datePicker"
-      [value]="formattedSelectedDate" 
-      [min]="minDate" 
+    <input type="date" class="form-control" id="datePicker" [value]="formattedSelectedDate" [min]="minDate"
       (change)="onDateChange($event)">
   </div>
 
-    <!-- Hora -->
-    <hour-range-picker [selectedDate]="selectedDate" (packSelected)="handlePackSelection($event)" (dateTimeSelected)="handleDateTimeSelected($event)"></hour-range-picker>
+  <!-- Hora -->
+  <hour-range-picker [selectedDate]="selectedDate" (packSelected)="handlePackSelection($event)"
+    (dateTimeSelected)="handleDateTimeSelected($event)"></hour-range-picker>
 
-    <!-- Fecha -->
-    <!-- <div class="mb-4">
-    <label class="form-label small text-muted text-start d-block">Elige una fecha</label>
-    <select class="form-select" [(ngModel)]="selectedDate" (change)="onDateChange($any($event.target).value)">
-      <option *ngFor="let date of availableDates" [value]="date">
-        {{ date | date:'dd/MM/yyyy' }}
-      </option>
-    </select>
-  </div> -->
-
-    <!-- Precio total -->
-    <div *ngIf="!errorInHourPicker">
-      <p class="small text-muted text-start mb-4">
-        Pagarás <strong class="text-dark">S/ {{ totalPrice }}</strong> por
-        <strong class="text-dark">{{ hours }}</strong> hora(s)
-      </p>
-    </div>
-
-    <button class="btn btn-primary w-100" [disabled]="errorInHourPicker" (click)="goToBooking()">
-      Reservar ahora
-    </button>
+  <!-- Precio total -->
+  <div *ngIf="!disableButton">
+    <p class="small text-muted text-start mb-4">
+      Pagarás <strong class="text-dark">S/ {{ totalPrice }}</strong> por
+      <strong class="text-dark">{{ hours }}</strong> hora(s)
+    </p>
   </div>
+
+  <div class="dropdown mb-4">
+    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownRoomButton"
+      data-bs-toggle="dropdown" aria-expanded="false">
+      {{ getSelectedRoomText() }}
+    </button>
+    <ul class="dropdown-menu w-100" aria-labelledby="dropdownRoomButton">
+      <li *ngFor="let room of hotel()?.tipoHabitacion?.[roomSelected()]?.habitaciones">
+        <button class="dropdown-item" type="button" [disabled]="!room.disponible" [class.text-muted]="!room.disponible"
+          (click)="selectRoom(room.idHabitacion)">
+          Habitación {{ room.numeroHabitacion }}
+          <span *ngIf="!room.disponible">(No disponible)</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <button class="btn btn-primary w-100" [disabled]="disableButton" (click)="goToBooking()">
+    Reservar ahora
+  </button>
+</div>

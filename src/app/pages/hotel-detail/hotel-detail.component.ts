@@ -21,6 +21,7 @@ export class HotelDetailComponent {
   isSelected: boolean = false;
   selectedRoomIndex: number = 0;
   detail?: HotelDetailModel;
+  isLoading = false;
 
   constructor(
     private hoteDetailService: HotelDetailService,
@@ -30,10 +31,12 @@ export class HotelDetailComponent {
 
   ngOnInit() {
     const hotelId = this.route.snapshot.paramMap.get('id');
+    this.isLoading = true;
     this.loaderService.show();
     if (hotelId) {
       this.hoteDetailService.getHotelDetail(hotelId).subscribe(
         (rest: HotelDetailResponse) => {
+          this.isLoading = false;
           this.loaderService.hide(),
           this.detail = rest.data[0];
           this.hotelId = hotelId;

@@ -25,8 +25,10 @@ export class HotelBookingCardComponent {
   hotel = input.required<HotelDetailModel>();
   roomSelected = input.required<number>();
 
+  selectedRoomId: number | null = null;
+
   // selectedDate: Date = new Date();
-  errorInHourPicker = false;
+  disableButton = false;
   hours: number = 3;
   selectedPack: string = '';
 
@@ -39,6 +41,50 @@ export class HotelBookingCardComponent {
 
   constructor(private router: Router) { }
 
+  private isHotelDataReady(): boolean {
+    const hotelData = this.hotel?.();
+    return !!hotelData && !!hotelData.tipoHabitacion && hotelData.tipoHabitacion.length > 0;
+  }
+
+  preselectFirstAvailableRoom(): void {
+    if (!this.isHotelDataReady()) {
+      console.log('Hotel data not ready yet, skipping preselection...');
+      return;
+    }
+  
+    const hotelData = this.hotel();
+    const habitaciones = hotelData.tipoHabitacion[this.roomSelected()]?.habitaciones;
+    const firstAvailable = habitaciones?.find(room => room.disponible);
+  
+    if (firstAvailable) {
+      this.selectedRoomId = firstAvailable.idHabitacion;
+      console.log('Preselección automática:');
+      console.log('ID:', firstAvailable.idHabitacion);
+      console.log('Número de Habitación:', firstAvailable.numeroHabitacion);
+    } else {
+      this.selectedRoomId = null;
+      console.log('Sin habitaciones disponibles');
+    }
+  }
+
+  getSelectedRoomText(): string {
+    const hotelData = this.hotel?.();
+    if (!hotelData || !hotelData.tipoHabitacion) return 'Sin habitaciones disponibles';
+  
+    const habitaciones = hotelData.tipoHabitacion[this.roomSelected()]?.habitaciones;
+    const selectedRoom = habitaciones?.find(room => room.idHabitacion === this.selectedRoomId);
+  
+    if (selectedRoom) {
+      return `Habitación ${selectedRoom.numeroHabitacion}`;
+    }
+    return 'Sin habitaciones disponibles';
+  }
+
+  selectRoom(roomId: number): void {
+    this.selectedRoomId = roomId;
+    console.log('Habitación seleccionada:', roomId);
+  }
+
   handleDateTimeSelected(dateTime: Date) {
     console.log('Fecha y hora seleccionada:', dateTime);
     // Aquí ya tienes un Date completo con fecha y hora combinadas.
@@ -49,19 +95,17 @@ export class HotelBookingCardComponent {
     this.hours = parseInt(selectedValue, 10);
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   if (changes['detail'] && this.detail()) {
-  //     const availability = this.detail().availability.map((d: { date: string }) => new Date(d.date));
-  //     const today = new Date();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['roomSelected'] || changes['hotel']) {
+      this.preselectFirstAvailableRoom();
+    }
+  }
 
-  //     const todayAvailable = availability.some(date => this.isSameDay(date, today));
-  //     this.selectedDate = todayAvailable ? today : availability[0] || today;
-  //   }
-  // }
-
-  // selectRooms(count: number): void {
-  //   this.selectedRooms = count;
-  // }
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.preselectFirstAvailableRoom();
+    });
+  }
 
   ngOnInit(): void {
     const today = new Date();
@@ -83,17 +127,17 @@ export class HotelBookingCardComponent {
   }
 
   onErrorChanged(hasError: boolean): void {
-    this.errorInHourPicker = hasError;
+    this.disableButton = hasError;
   }
 
   get pricePerHour(): number {
     const hotel = this.hotel?.();
     const roomIndex = this.roomSelected?.();
-  
+
     if (!hotel || roomIndex === undefined || !hotel.tipoHabitacion[roomIndex]) {
-      return 0; 
+      return 0;
     }
-  
+
     return hotel.tipoHabitacion[roomIndex].precio;
   }
 
@@ -105,6 +149,7 @@ export class HotelBookingCardComponent {
 
   goToBooking(): void {
     this.router.navigate(['/booking']);
+    console.log('Navegando a la página de reserva');
   }
 
 }
