@@ -1,14 +1,22 @@
-// import { BookingInfoModel } from "./booking-info-model";
 
 export interface PrePaymentModel {
-    transactionId: string;
-    amount: number;
-    taxes: number;
-    totalAmount: number;
-    currency: string;
+    hotelId: number;
+    roomId: number;
+    hotelName: string;
+    hotelLocation: string;
     customerName: string;
-    customerLastName: string;
     customerEmail: string;
-    customerPhone: string;
-    // bookingInfo: BookingInfoModel;
+    roomType: string;
+    roomNumber: string;
+    totalPrice: number;
+    totalHours: number;
+    bookingId: number;
+}
+
+export interface PaymentResquestBody {
+    ReservaID: number;
+}
+
+export interface PaymentResponse {
+    msg: string;
 }

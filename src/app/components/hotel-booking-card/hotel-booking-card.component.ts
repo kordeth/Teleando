@@ -93,12 +93,17 @@ export class HotelBookingCardComponent {
     const formatted = this.formatDateTimeLocal(dateTime);
     this.initDateFormatted = formatted;
     this.finalDateFormatted = this.formatDateTimeWithAddedHours(dateTime, this.hours);
-    console.log('Fecha y hora seleccionada (local):', formatted);
+    console.log('Fecha y hora seleccionada (local):', this.initDateFormatted, this.finalDateFormatted);
   }
 
   handlePackSelection(selectedValue: string) {
     console.log('Pack seleccionado (número):', selectedValue);
     this.hours = parseInt(selectedValue, 10);
+    if (this.initDateFormatted) {
+      const initDate = new Date(this.initDateFormatted);
+      this.finalDateFormatted = this.formatDateTimeWithAddedHours(initDate, this.hours);
+      console.log('Nueva fecha final recalculada:', this.finalDateFormatted);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -182,16 +187,15 @@ export class HotelBookingCardComponent {
       hotelId: this.hotel()?.HotelID,
       roomId: this.selectedRoomId ?? 0,
       hotelName: this.hotel()?.nombre,
-      hotemLocation: this.hotel()?.direccion,
+      hotelLocation: this.hotel()?.distrito + ', ' + this.hotel()?.ciudad,
       roomType: this.hotel()?.tipoHabitacion[this.roomSelected()]?.nombre,
+      roomNumber: this.getSelectedRoomText(),
       startDate: this.initDateFormatted,
       endDate: this.finalDateFormatted,
       totalPrice: this.totalPrice,
       totalHours: this.hours
     }
-    
     this.router.navigate(['/booking'], { state: { booking: bookingModel } });
-    
   }
 
 }

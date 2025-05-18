@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BookingModel } from '@models/booking-info-model';
-import { BookingRequestBody, BookingResponse } from '@models/booking-info-model';
+import { BookingRequestBody } from '@models/booking-info-model';
 import { BookingInfoService } from '@services/booking-info/booking-info.service';
 import { LoaderService } from '@services/loader/loader.service';
+import { PrePaymentModel } from '@models/prepayment-model';
 
 @Component({
   selector: 'app-booking-info',
@@ -51,13 +52,20 @@ export class BookingInfoComponent {
     };
     this.loaderService.show();
     this.bookingInfoService.createBooking(bookingBody).subscribe({
-      next: (response: BookingResponse) => {
+      next: (response: any) => {
         this.loaderService.hide();
-        console.log('Reserva creada con éxito:', response);
-        this.router.navigate(['/payment'])
+        // Paso 1: Parsear el string JSON
+        const body = JSON.parse(response.body);
+    
+        // Paso 2: Ahora sí puedes acceder a los valores
+        console.log('Reserva ID:', body.reserva_id);
+        console.log('Mensaje:', body.msg);
+    
+        // Llamar a tu método con el ID de la reserva
+        this.goToPayment(body.reserva_id);
       },
       error: (err) => {
-        this.loaderService.hide();
+        this.loaderService.show();
         console.error('Error al crear la reserva:', err);
       }
     });
@@ -88,6 +96,24 @@ export class BookingInfoComponent {
     } else {
       return `Reserva desde el ${startDay} ${startTime} hasta el ${endDay} ${endTime}`;
     }
+  }
+
+  goToPayment(bookingId: number) {
+    const prepaymentModel: PrePaymentModel = {
+      hotelId: this.bookingData.hotelId,
+      roomId: this.bookingData.roomId,
+      hotelName: this.bookingData.hotelName,
+      hotelLocation: this.bookingData.hotelLocation,
+      customerName: `${this.form.firstName} ${this.form.lastName}`,
+      customerEmail: this.form.email,
+      roomType: this.bookingData.roomType,
+      roomNumber: this.bookingData.roomNumber,
+      totalPrice: this.bookingData.totalPrice,
+      totalHours: this.bookingData.totalHours,
+      bookingId: bookingId 
+    }
+    console.log('booking id',bookingId);
+    this.router.navigate(['/payment'], { state: { prepayment: prepaymentModel } });
   }
 
   cancel() {

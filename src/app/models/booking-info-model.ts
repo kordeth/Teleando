@@ -2,7 +2,8 @@ export interface BookingModel{
     hotelId: number;
     roomId: number;
     hotelName: string;
-    hotemLocation: string;
+    hotelLocation: string;
+    roomNumber: string;
     roomType: string;
     startDate: string;
     endDate: string;
@@ -15,9 +16,4 @@ export interface BookingRequestBody {
     NombreCliente: string;
     FechaInicio:   string;
     FechaFin:      string;
-}
-
-export interface BookingResponse {
-    reserva_id: number;
-    msg: string;
 }

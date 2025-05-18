@@ -57,7 +57,6 @@ export class HotelDetailComponent {
   get selectedRoomImage() {
     const mainImage = this.selectedRoom?.imagenRuta || '';
     const images = [mainImage, `assets/hotels/${this.hotelId}.png`];
-    console.log('Selected Room Image:', images);
     return images;
   }
 
