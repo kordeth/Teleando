@@ -18,7 +18,8 @@
     matInput 
     [formControl]="startControl" 
     [matTimepicker]="startPicker" 
-    placeholder="Selecciona la hora">
+    placeholder="Selecciona la hora"
+    [matTimepickerMin]="minTime">
 
   <mat-timepicker-toggle matIconSuffix [for]="startPicker"></mat-timepicker-toggle>
   <mat-timepicker #startPicker interval="1h"></mat-timepicker>

@@ -1,16 +1,3 @@
-export interface BookingInfoModel {
-    selectedDate: string;
-    selectedHours: number;
-    name: string;
-    location: string;
-    roomType: string;
-    image: string;
-    pricePerHour: number;
-    totalPrice: number;
-    rangeFormatted: string;
-    currency: string;
-}
-
 export interface BookingModel{
     hotelId: number;
     roomId: number;
@@ -21,4 +8,16 @@ export interface BookingModel{
     endDate: string;
     totalPrice: number;
     totalHours: number;
+}
+
+export interface BookingRequestBody {
+    HabitacionID:  number;
+    NombreCliente: string;
+    FechaInicio:   string;
+    FechaFin:      string;
+}
+
+export interface BookingResponse {
+    reserva_id: number;
+    msg: string;
 }

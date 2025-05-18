@@ -1,4 +1,4 @@
-import { BookingInfoModel } from "./booking-info-model";
+// import { BookingInfoModel } from "./booking-info-model";
 
 export interface PrePaymentModel {
     transactionId: string;
@@ -10,5 +10,5 @@ export interface PrePaymentModel {
     customerLastName: string;
     customerEmail: string;
     customerPhone: string;
-    bookingInfo: BookingInfoModel;
+    // bookingInfo: BookingInfoModel;
 }

@@ -18,19 +18,19 @@ export class PrePaymentService {
         customerLastName: 'Pérez',
         customerEmail: 'juanperez@gmail.com',
         customerPhone: '987654321',
-        bookingInfo:
-        {
-            selectedDate: '2025-05-08',
-            selectedHours: 3,
-            name: 'Gran Hotel Imperial',
-            location: 'San Bartolo, Lima',
-            roomType: 'Estándar',
-            image: 'assets/hotels-mock/items/item-1.svg',
-            pricePerHour: 80,
-            totalPrice: 240.00,
-            rangeFormatted: '10:00 AM  - 01:00 PM',
-            currency: 'PEN',
-        }
+        // bookingInfo:
+        // {
+        //     selectedDate: '2025-05-08',
+        //     selectedHours: 3,
+        //     name: 'Gran Hotel Imperial',
+        //     location: 'San Bartolo, Lima',
+        //     roomType: 'Estándar',
+        //     image: 'assets/hotels-mock/items/item-1.svg',
+        //     pricePerHour: 80,
+        //     totalPrice: 240.00,
+        //     rangeFormatted: '10:00 AM  - 01:00 PM',
+        //     currency: 'PEN',
+        // }
 
     }
 

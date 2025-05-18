@@ -12,6 +12,7 @@ import { HourRangePickerComponent } from '@components/hour-range-picker/hour-ran
 import { input } from '@angular/core';
 import { HotelDetailModel } from '@models/hotel-detail';
 import { parse } from 'path';
+import { BookingModel } from '@models/booking-info-model';
 
 @Component({
   selector: 'hotel-booking-card',
@@ -38,6 +39,9 @@ export class HotelBookingCardComponent {
 
   selectedRooms: number = 1;
   availableRooms: number[] = [];
+
+  initDateFormatted: string = '';
+  finalDateFormatted: string = '';
 
   constructor(private router: Router) { }
 
@@ -86,8 +90,10 @@ export class HotelBookingCardComponent {
   }
 
   handleDateTimeSelected(dateTime: Date) {
-    console.log('Fecha y hora seleccionada:', dateTime);
-    // Aquí ya tienes un Date completo con fecha y hora combinadas.
+    const formatted = this.formatDateTimeLocal(dateTime);
+    this.initDateFormatted = formatted;
+    this.finalDateFormatted = this.formatDateTimeWithAddedHours(dateTime, this.hours);
+    console.log('Fecha y hora seleccionada (local):', formatted);
   }
 
   handlePackSelection(selectedValue: string) {
@@ -147,9 +153,45 @@ export class HotelBookingCardComponent {
     return Math.round(total * 100) / 100;
   }
 
+  formatDateTimeLocal(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  }
+
+  formatDateTimeWithAddedHours(date: Date, hoursToAdd: number): string {
+    const newDate = new Date(date.getTime() + hoursToAdd * 60 * 60 * 1000);
+  
+    const year = newDate.getFullYear();
+    const month = String(newDate.getMonth() + 1).padStart(2, '0');
+    const day = String(newDate.getDate()).padStart(2, '0');
+    const hours = String(newDate.getHours()).padStart(2, '0');
+    const minutes = String(newDate.getMinutes()).padStart(2, '0');
+    const seconds = String(newDate.getSeconds()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  }
+
   goToBooking(): void {
-    this.router.navigate(['/booking']);
-    console.log('Navegando a la página de reserva');
+    const bookingModel: BookingModel = {
+      hotelId: this.hotel()?.HotelID,
+      roomId: this.selectedRoomId ?? 0,
+      hotelName: this.hotel()?.nombre,
+      hotemLocation: this.hotel()?.direccion,
+      roomType: this.hotel()?.tipoHabitacion[this.roomSelected()]?.nombre,
+      startDate: this.initDateFormatted,
+      endDate: this.finalDateFormatted,
+      totalPrice: this.totalPrice,
+      totalHours: this.hours
+    }
+    
+    this.router.navigate(['/booking'], { state: { booking: bookingModel } });
+    
   }
 
 }
