@@ -1,10 +1,11 @@
+import { NgIf } from '@angular/common';
 import { Component,OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,NgIf],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 }) 
@@ -27,8 +28,33 @@ export class RegisterComponent {
       direccion: ['',Validators.required],
       telefono: ['',Validators.required],
       correo: ['',Validators.email],
-      passwordUsuario: [''],  
+      passwordUsuario: ['',Validators.required],  
     });
+  
+    get nombreInvalido() {
+      return this.registerForm.get('nombres')?.invalid && this.registerForm.get('nombres')?.touched;
+    }
+    get apellidoInvalido() {
+      return this.registerForm.get('apellidos')?.invalid && this.registerForm.get('apellidos')?.touched;
+    }
+    get documentoInvalido() {
+      return this.registerForm.get('documentoIdentidad')?.invalid && this.registerForm.get('documentoIdentidad')?.touched;
+    }
+    get direccionInvalido() {
+      return this.registerForm.get('direccion')?.invalid && this.registerForm.get('direccion')?.touched;
+    }
+    get telefonoInvalido() {
+      return this.registerForm.get('telefono')?.invalid && this.registerForm.get('telefono')?.touched;
+    }
+    get correoInvalido() {
+      return this.registerForm.get('correo')?.invalid && this.registerForm.get('correo')?.touched;
+    }
+    get passwordUsuarioInvalido() {
+      return this.registerForm.get('passwordUsuario')?.invalid && this.registerForm.get('passwordUsuario')?.touched;
+    }
+
+
+
   submit() {
     console.log(this.registerForm.value);
     // Aquí puedes agregar la lógica para enviar el formulario al servidor
