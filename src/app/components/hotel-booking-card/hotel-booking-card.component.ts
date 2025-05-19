@@ -194,4 +194,27 @@ export class HotelBookingCardComponent {
     this.router.navigate(['/booking'], { state: { booking: bookingModel } });
   }
 
+  isRoomAvailableByDate(room: any): boolean {
+  if (!this.initDateFormatted || !this.finalDateFormatted) return true;
+
+  const userStart = new Date(this.initDateFormatted);
+  const userEnd = new Date(this.finalDateFormatted);
+
+  // Si la habitación no tiene reservas, está disponible
+  if (!room.reservas || room.reservas.length === 0) return true;
+
+  // Verificar si alguna reserva se solapa con el rango seleccionado
+  return !room.reservas.some((reserva: any) => {
+    const reservaStart = new Date(reserva.fechaInicio);
+    const reservaEnd = new Date(reserva.fechaFin);
+
+    const overlap =
+      (userStart >= reservaStart && userStart < reservaEnd) ||
+      (userEnd > reservaStart && userEnd <= reservaEnd) ||
+      (userStart <= reservaStart && userEnd >= reservaEnd);
+
+    return overlap;
+    });
+  }
+
 }

@@ -30,10 +30,11 @@
     </button>
     <ul class="dropdown-menu w-100" aria-labelledby="dropdownRoomButton">
       <li *ngFor="let room of hotel()?.tipoHabitacion?.[roomSelected()]?.habitaciones">
-        <button class="dropdown-item" type="button" [disabled]="!room.disponible" [class.text-muted]="!room.disponible"
-          (click)="selectRoom(room.idHabitacion)">
-          Habitación {{ room.numeroHabitacion }}
-          <span *ngIf="!room.disponible">(No disponible)</span>
+        <button class="dropdown-item" type="button"
+          [disabled]="!room.disponible || !isRoomAvailableByDate(room)"
+          [class.text-muted]="!room.disponible || !isRoomAvailableByDate(room)"
+          (click)="selectRoom(room.idHabitacion)"> Habitación {{ room.numeroHabitacion }}
+          <span *ngIf="!room.disponible || !isRoomAvailableByDate(room)"> (No disponible) </span>
         </button>
       </li>
     </ul>
