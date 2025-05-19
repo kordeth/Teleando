@@ -10,19 +10,19 @@ import { Router } from '@angular/router';
 })
 export class SuccessComponent { 
   // bookingId sea igual a una cadena de 10 caracteres alfanumericos
-  bookingId: string = this.generateBookingId();
+  bookingId: string = '';
+
 
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation(); 
-  }
-
-  generateBookingId(): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    let result = '';
-    for (let i = 0; i < 6; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    const state = navigation?.extras.state as { bookingId: string };
+    if (state?.bookingId) {
+      this.bookingId = state.bookingId;
+      console.log('PrePayment Data:', this.bookingId);
+    } else {
+      console.warn('No prepayment data received.');
     }
-    return result;
+
   }
 
   goToHome() {

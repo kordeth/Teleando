@@ -1,18 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { HotelCardComponent } from "@components/hotel-card/hotel-card.component";
 import { HotelOfferCardComponent } from '@components/hotel-offer-card/hotel-offer-card.component';
-import { OfferModel } from '@models/home-model';
-import { MostPopularModel } from '@models/home-model';
 import { HomeService } from '@services/home/home.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { NgFor } from '@angular/common';
+import { HomeModel, Oferta } from '@models/home-model';
+import { LoaderService } from '@services/loader/loader.service';
+import { ErrorService } from '@services/error/error.service';
 
 @Component({
   selector: 'app-home',
-  imports: [HotelCardComponent, HotelOfferCardComponent, CommonModule, RouterModule],
+  imports: [NgFor, HotelCardComponent, HotelOfferCardComponent, CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: `
     .swiper {
       width: 100%;
@@ -22,33 +23,43 @@ import { RouterModule } from '@angular/router';
 
 })
 export class HomeComponent {
-  offers: OfferModel[] = [];
-  populars: MostPopularModel[] = [];
 
   constructor(
-    private homeService: HomeService
+    private homeService: HomeService,
+    private loaderService: LoaderService,
+    private errorService: ErrorService,
+    private router: Router
   ) { }
 
-  ngOnInit() {
-    this.homeService.getCurrentOffers().subscribe(
-      (data) => {
-        this.offers = data;
-      });
-    this.homeService.getMostPopular().subscribe(
-      (data) => {
-        this.populars = data;
+  ofertas: Oferta[] = []
+  populares: Oferta[] = []
+  isLoading = false;
+
+  __getData() {
+    this.loaderService.show();
+    this.isLoading = true;
+    this.homeService.listar_Ofertas_Populares().subscribe({
+      next: (rest: HomeModel) => {
+        this.isLoading = false;
+        this.loaderService.hide();
+        this.ofertas = rest.data[0].ofertas;
+        this.populares = rest.data[0].populares;
+        console.log(this.ofertas);
+      },
+      error: (err) => {
+        this.loaderService.hide();
+        this.errorService.show();
+        console.error('Error al cargar las ofertas:', err);
       }
-    );
+    });
   }
 
-  goToOffers() { 
-    console.log('Go to offers');
-    // TODO: Implement navigation to offers page
+  ngOnInit(): void {
+    this.__getData();
   }
 
-  goToRecommendations() {
-    console.log('Go to recommendations');
-    // TODO: Implement navigation to recommendations page
+  goToDetail(id: number) {
+    this.router.navigate(['/hotel', id]);
   }
 
 }

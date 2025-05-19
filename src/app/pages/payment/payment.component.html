@@ -9,7 +9,7 @@
 
   <!-- Título principal -->
   <div class="text-center mb-5">
-    <h2 class="fw-bold">Paga con tu tarjeta de crédito</h2>
+    <h2 class="fw-bold">Paga con tu tarjeta</h2>
     <p class="text-muted small">Por favor, completa los datos para finalizar tu reserva</p>
   </div>
 
@@ -22,7 +22,7 @@
           <h5 class="mb-3">Resumen de la reserva</h5>
           <div class="d-flex justify-content-between">
             <span>Nombre:</span>
-            <span><strong>{{ data.customerName }} {{ data.customerLastName }}</strong></span>
+            <span><strong>{{ data.customerName }} </strong></span>
           </div>
           <div class="d-flex justify-content-between">
             <span>Email:</span>
@@ -31,11 +31,15 @@
           <hr>
           <div class="d-flex justify-content-between">
             <span>Hotel:</span>
-            <span><strong>{{ data.bookingInfo.name }} - {{ data.bookingInfo.location }}</strong></span>
+            <span><strong>{{ data.hotelName }} - {{ data.hotelLocation}}</strong></span>
           </div>
           <div class="d-flex justify-content-between">
-            <span>Habitación:</span>
-            <span><strong>{{ data.bookingInfo.roomType }} | {{ data.bookingInfo.rangeFormatted }}</strong></span>
+            <span>Número:</span>
+            <span><strong> {{data.roomNumber}}</strong></span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span>Tipo de habitación:</span>
+            <span><strong>{{ data.roomType }} por {{ data.totalHours }} horas</strong></span>
           </div>
         </div>
   
@@ -44,16 +48,16 @@
           <h5 class="mb-3">Resumen de Pago</h5>
           <div class="d-flex justify-content-between">
             <span>Subtotal:</span>
-            <span><strong>S/ {{ data.totalAmount | number: '1.2-2' }}</strong></span>
+            <span><strong>S/ {{ priceWithoutTaxes }}</strong></span>
           </div>
           <div class="d-flex justify-content-between">
             <span>IGV (18%):</span>
-            <span><strong>S/ {{ data.taxes | number: '1.2-2'}}</strong></span>
+            <span><strong>S/ {{ taxesAmount }}</strong></span>
           </div>
           <hr>
           <div class="d-flex justify-content-between">
             <span>Total a pagar:</span>
-            <span class="text-primary fw-bold">S/ {{ data.totalAmount | number: '1.2-2'}}</span>
+            <span class="text-primary fw-bold">S/ {{ data.totalPrice }}</span>
           </div>
         </div>
       </div>
@@ -109,7 +113,7 @@
             </div>
       
             <div class="col-md-6 mb-3">
-              <label class="form-label">CCV</label>
+              <label class="form-label">CVV</label>
               <input type="text" 
                      class="form-control" 
                      name="cvc" 
@@ -119,7 +123,7 @@
                      maxlength="4"
                      #cvc="ngModel" />
               <div *ngIf="cvc.invalid && (cvc.dirty || cvc.touched)" class="text-danger small mt-1">
-                El CCV debe tener 3 o 4 números.
+                El CVV debe tener 3 o 4 números.
               </div>
             </div>
           </div>

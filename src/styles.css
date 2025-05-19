@@ -22,6 +22,22 @@ body {
     border-color: var(--hover-primary-color);
 }
 
+.btn-secondary {
+    background-color: white;
+    border-color: var(--primary-color);
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: white;
+    color: var(--hover-primary-color); /* Cambia el color del texto */
+    border-color: var(--hover-primary-color); /* Opcional: cambia también el borde */
+}
+
 .popular-badge {
     position: absolute;
     top: 0.5rem;
@@ -52,3 +68,18 @@ body {
     background: #0d6efd;
     color: #ffffff;
 }
+
+.fade-in {
+    animation: fadeInEffect 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInEffect {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

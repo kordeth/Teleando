@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.contact-card {
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 50px 50px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}

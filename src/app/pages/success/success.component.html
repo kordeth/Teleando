@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="fade-in container my-5">
 
     <!-- Steps -->
     <div class="d-flex justify-content-center align-items-center gap-4 mb-5">
@@ -9,8 +9,8 @@
 
     <div class="text-center mb-5">
         <h2 class="fw-bold">Pago exitoso</h2>
-        <p class="text-muted small">Te enviamos un correo con la confirmación de la reserva número</p>
-        <h3 class="fw-bold text-success"> {{ bookingId }}</h3>
+        <p class="text-muted small">Te enviamos un correo con la confirmación</p>
+        <h3 class="fw-bold text-success"> Reserva #{{ bookingId }}</h3>
         <img src="assets/illustrations/il-success.svg" alt="Success" class="img-fluid mt-4" style="max-width: 300px;">
         <div class="d-flex justify-content-center mt-4">
             <button type="submit" class="btn btn-primary px-10 py-2" (click)="goToHome()">

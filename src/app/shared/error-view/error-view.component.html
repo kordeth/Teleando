@@ -1,0 +1,9 @@
+<div class="fade-in modal fade show d-block" *ngIf="errorService.error$ | async" style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-4">
+        <h5 class="modal-title fw-bold">Tenemos problemas de conexión</h5>
+        <p class="text-muted mt-3">Ocurrió un error inesperado. <br> Por favor, intenta nuevamente en unos minutos.</p>
+        <button type="button" class="btn btn-primary mt-3" (click)="closeAndRedirect()">Cerrar</button>
+      </div>
+    </div>
+  </div>
