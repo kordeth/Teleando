@@ -8,13 +8,13 @@
           <div class="card-body">
             <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
               <div class="mb-3">
-                <label for="username" class="form-label">Nombre de Usuario</label>
+                <label for="correo" class="form-label">Correo Electrónico</label>
                 <input 
                   type="text" 
                   class="form-control" 
-                  id="username" 
-                  [(ngModel)]="user.username" 
-                  name="username" 
+                  id="correo" 
+                  [(ngModel)]="user.correo" 
+                  name="correo" 
                   required
                 />
               </div>
@@ -24,8 +24,8 @@
                   type="password" 
                   class="form-control" 
                   id="password" 
-                  [(ngModel)]="user.password" 
-                  name="password" 
+                  [(ngModel)]="user.passwordUsuario" 
+                  name="passwordUsuario" 
                   required
                 />
               </div>
