@@ -7,6 +7,7 @@ import { BookingModel } from '@models/booking-info-model';
 import { BookingRequestBody } from '@models/booking-info-model';
 import { BookingInfoService } from '@services/booking-info/booking-info.service';
 import { LoaderService } from '@services/loader/loader.service';
+import { ErrorService } from '@services/error/error.service';
 import { PrePaymentModel } from '@models/prepayment-model';
 
 @Component({
@@ -31,7 +32,12 @@ export class BookingInfoComponent {
     return `assets/hotels/${this.bookingData.hotelId}.png`
   }
 
-  constructor(private router: Router, private bookingInfoService: BookingInfoService, private loaderService: LoaderService) {
+  constructor(
+    private router: Router, 
+    private bookingInfoService: BookingInfoService, 
+    private loaderService: LoaderService,
+    private errorService: ErrorService
+  ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { booking: BookingModel };
 
@@ -56,16 +62,11 @@ export class BookingInfoComponent {
         this.loaderService.hide();
         // Paso 1: Parsear el string JSON
         const body = JSON.parse(response.body);
-    
-        // Paso 2: Ahora sí puedes acceder a los valores
-        console.log('Reserva ID:', body.reserva_id);
-        console.log('Mensaje:', body.msg);
-    
-        // Llamar a tu método con el ID de la reserva
         this.goToPayment(body.reserva_id);
       },
       error: (err) => {
-        this.loaderService.show();
+        this.loaderService.hide();
+        this.errorService.show();
         console.error('Error al crear la reserva:', err);
       }
     });

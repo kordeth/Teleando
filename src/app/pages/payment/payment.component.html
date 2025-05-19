@@ -113,7 +113,7 @@
             </div>
       
             <div class="col-md-6 mb-3">
-              <label class="form-label">CCV</label>
+              <label class="form-label">CVV</label>
               <input type="text" 
                      class="form-control" 
                      name="cvc" 
@@ -123,7 +123,7 @@
                      maxlength="4"
                      #cvc="ngModel" />
               <div *ngIf="cvc.invalid && (cvc.dirty || cvc.touched)" class="text-danger small mt-1">
-                El CCV debe tener 3 o 4 números.
+                El CVV debe tener 3 o 4 números.
               </div>
             </div>
           </div>

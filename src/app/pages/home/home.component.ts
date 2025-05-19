@@ -7,6 +7,7 @@ import { RouterModule, Router } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { HomeModel, Oferta } from '@models/home-model';
 import { LoaderService } from '@services/loader/loader.service';
+import { ErrorService } from '@services/error/error.service';
 
 @Component({
   selector: 'app-home',
@@ -26,19 +27,30 @@ export class HomeComponent {
   constructor(
     private homeService: HomeService,
     private loaderService: LoaderService,
+    private errorService: ErrorService,
     private router: Router
   ) { }
 
   ofertas: Oferta[] = []
   populares: Oferta[] = []
+  isLoading = false;
 
   __getData() {
     this.loaderService.show();
-    this.homeService.listar_Ofertas_Populares().subscribe((rest: HomeModel) => {
-      this.loaderService.hide();
-      this.ofertas = rest.data[0].ofertas;
-      this.populares = rest.data[0].populares;
-      console.log(this.ofertas);
+    this.isLoading = true;
+    this.homeService.listar_Ofertas_Populares().subscribe({
+      next: (rest: HomeModel) => {
+        this.isLoading = false;
+        this.loaderService.hide();
+        this.ofertas = rest.data[0].ofertas;
+        this.populares = rest.data[0].populares;
+        console.log(this.ofertas);
+      },
+      error: (err) => {
+        this.loaderService.hide();
+        this.errorService.show();
+        console.error('Error al cargar las ofertas:', err);
+      }
     });
   }
 
@@ -46,24 +58,8 @@ export class HomeComponent {
     this.__getData();
   }
 
-
   goToDetail(id: number) {
-    // redireccionar a la página de detalle del hotel
     this.router.navigate(['/hotel', id]);
-    console.log('Go to detail', id);
   }
 
 }
-
-
-// goToOffers() { 
-//   console.log('Go to offers');
-//   // TODO: Implement navigation to offers page
-// }
-
-// goToRecommendations() {
-//   console.log('Go to recommendations');
-//   // TODO: Implement navigation to recommendations page
-// }
-
-// }

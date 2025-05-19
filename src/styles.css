@@ -68,3 +68,18 @@ body {
     background: #0d6efd;
     color: #ffffff;
 }
+
+.fade-in {
+    animation: fadeInEffect 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInEffect {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

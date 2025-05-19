@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { PaymentResquestBody, PrePaymentModel } from '@models/prepayment-model';
 import { PaymentService } from '@services/prepayment/payment.service';
 import { LoaderService } from '@services/loader/loader.service';
+import { ErrorService } from '@services/error/error.service';
 
 @Component({
   selector: 'app-payment',
@@ -26,7 +27,8 @@ export class PaymentComponent {
   constructor(
     private router: Router,
     private paymentService: PaymentService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private errorService: ErrorService
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { prepayment: PrePaymentModel };
@@ -49,14 +51,10 @@ export class PaymentComponent {
   }
 
   submitPayment() {
-
     const paymentBody: PaymentResquestBody = {
       ReservaID: this.data.bookingId,
-    }
-
-    console.log('Payment Body:', paymentBody);
-
-    this.loaderService.show();
+    };  
+    this.loaderService.show()
     this.paymentService.confirmBooking(paymentBody).subscribe({
       next: (response) => {
         this.loaderService.hide();
@@ -65,8 +63,10 @@ export class PaymentComponent {
       },
       error: (err) => {
         this.loaderService.hide();
+        this.errorService.show();
+        console.error('Error al procesar el pago:', err);
       }
-    });    
+    });
   }
 
   goToSuccess() {

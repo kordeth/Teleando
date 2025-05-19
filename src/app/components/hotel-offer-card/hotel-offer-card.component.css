@@ -6,8 +6,13 @@
   height: 300px;
   position: relative;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.hotel-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
 .hotel-image {
   object-fit: cover;
   height: 100%;

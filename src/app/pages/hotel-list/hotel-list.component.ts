@@ -5,12 +5,13 @@ import { HotelItemModel } from '@models/hotel-item';
 import { HotelListModel} from '@models/hotel-item';
 import { HotelItemComponent } from '@components/hotel-item/hotel-item.component';
 import { HotelListService } from '@services/hotel-list/hotel-list.service';
-import { GoogleMap, MapAdvancedMarker, GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 import { LoaderService } from '@services/loader/loader.service';
+import { ErrorService } from '@services/error/error.service';
 
 @Component({
   selector: 'hotel-list',
-  imports: [ HotelItemComponent, CommonModule, GoogleMap, GoogleMapsModule, MapAdvancedMarker, FormsModule],
+  imports: [ HotelItemComponent, CommonModule, GoogleMap, GoogleMapsModule, FormsModule],
   templateUrl: './hotel-list.component.html',
   styleUrl: './hotel-list.component.css',
 })
@@ -19,6 +20,7 @@ export class HotelListComponent {
   list: HotelItemModel[] = [];
   filteredList: HotelItemModel[] = [];
   searchQuery: string = '';
+  isLoading: boolean = false;
 
   center: google.maps.LatLngLiteral = { lat: -12.0455959, lng: -77.0322017 };
   center2: google.maps.LatLngLiteral = { lat: -12.0472121, lng: -77.0412855 };
@@ -26,15 +28,23 @@ export class HotelListComponent {
   zoom: number = 11.04;
   zoom2: number = 11;
 
-  constructor(private hotelListService: HotelListService, private loaderService: LoaderService) {}
+  constructor(private hotelListService: HotelListService, private loaderService: LoaderService, private errorService: ErrorService) {}
 
   ngOnInit() {
-    this.loaderService.show()
-    this.hotelListService.getHotelList().subscribe((rest: HotelListModel) => {
-      this.loaderService.hide()
-      this.list = rest.data;
-      this.filteredList = rest.data;
-      console.log(this.list);
+    this.isLoading = true;
+    this.loaderService.show();
+    this.hotelListService.getHotelList().subscribe({
+      next: (rest: HotelListModel) => {
+        this.isLoading = false;
+        this.loaderService.hide();
+        this.list = rest.data;
+        this.filteredList = rest.data;
+      },
+      error: (err) => {
+        this.loaderService.hide();
+        this.errorService.show(); // Muestra el modal de error
+        console.error('Error al cargar la lista de hoteles:', err);
+      }
     });
   }
 

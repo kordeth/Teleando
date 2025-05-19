@@ -27,8 +27,7 @@
 </section>
 
 
-<section class="container my-5 cursor-pointer" > 
-    <!-- (click)="goToOffers()"  -->
+<section *ngIf="!isLoading" class="fade-in container my-5 cursor-pointer" > 
     <h2 class="mb-4">Ofertas</h2>
     <div class="d-flex overflow-auto flex-nowrap gap-3 pb-2">
         <div *ngFor="let offer of ofertas" class="flex-shrink-0" style="width: 250px;">
@@ -37,8 +36,7 @@
     </div>
 </section>
 
-<section class="container my-5 cursor-pointer" >
-    <!-- (click)="goToRecommendations()" -->
+<section *ngIf="!isLoading" class="fade-in container my-5 cursor-pointer" >
     <h2 class="mb-4">Recomendados</h2>
     <div class="d-flex overflow-auto flex-nowrap gap-3 pb-2">
         <div *ngFor="let popular of populares" class="flex-shrink-0" style="width: 250px;">

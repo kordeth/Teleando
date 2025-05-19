@@ -62,12 +62,8 @@ export class HotelBookingCardComponent {
   
     if (firstAvailable) {
       this.selectedRoomId = firstAvailable.idHabitacion;
-      console.log('Preselección automática:');
-      console.log('ID:', firstAvailable.idHabitacion);
-      console.log('Número de Habitación:', firstAvailable.numeroHabitacion);
     } else {
       this.selectedRoomId = null;
-      console.log('Sin habitaciones disponibles');
     }
   }
 
