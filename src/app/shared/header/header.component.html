@@ -9,13 +9,41 @@
           <a class="nav-link" routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Inicio</a>          
           <a class="nav-link" routerLink="hotels" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Reservar</a>
           <a class="nav-link" routerLink="contact-us" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Contáctanos</a>
+          
           <ng-container *ngIf="authService.currentUser(); else guestLinks">
-            <span class="nav-link">Hola, {{ authService.currentUser().nombres }}</span>
-            <a class="nav-link" (click)="logout()">Cerrar sesión</a>
+            <div class="dropdown">
+              <button 
+                class="btn btn-outline-primary dropdown-toggle d-flex align-items-center" 
+                type="button" 
+                id="userDropdown" 
+                data-bs-toggle="dropdown" 
+                aria-expanded="false"
+              >
+                <i class="bi bi-person-circle me-2"></i>
+                {{ authService.currentUser().correo }}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li>
+                  <a class="dropdown-item" routerLink="/profile">
+                    <i class="bi bi-gear me-2"></i> Perfil
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <button class="dropdown-item text-danger" (click)="logout()">
+                    <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+                  </button>
+                </li>
+              </ul>
+            </div>
           </ng-container>
+          
           <ng-template #guestLinks>
-            <a class="nav-link" routerLink="login">Login</a>
+            <a class="btn btn-outline-primary" routerLink="login">
+              <i class="bi bi-person-fill me-2"></i>Iniciar sesión
+            </a>
           </ng-template>
+          
           
         </div>
       </div>

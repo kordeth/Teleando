@@ -8,6 +8,7 @@ import { HotelDetailComponent } from '@pages/hotel-detail/hotel-detail.component
 import { ContactUsComponent } from '@pages/contact-us/contact-us.component';
 import { LoginComponent } from '@pages/login/login.component';
 import { RegisterComponent } from '@pages/register/register.component';
+import { ProfileComponent } from '@pages/profile/profile.component';
 
 
 export const routes: Routes = [
@@ -44,7 +45,12 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {   path: 'register', 
-        component: RegisterComponent },
+        component: RegisterComponent 
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent
+    },
     {
         path: '**',
         component: HomeComponent
