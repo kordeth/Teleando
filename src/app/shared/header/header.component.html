@@ -9,6 +9,14 @@
           <a class="nav-link" routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Inicio</a>          
           <a class="nav-link" routerLink="hotels" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Reservar</a>
           <a class="nav-link" routerLink="contact-us" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Contáctanos</a>
+          <ng-container *ngIf="authService.currentUser(); else guestLinks">
+            <span class="nav-link">Hola, {{ authService.currentUser().nombres }}</span>
+            <a class="nav-link" (click)="logout()">Cerrar sesión</a>
+          </ng-container>
+          <ng-template #guestLinks>
+            <a class="nav-link" routerLink="login">Login</a>
+          </ng-template>
+          
         </div>
       </div>
     </div>

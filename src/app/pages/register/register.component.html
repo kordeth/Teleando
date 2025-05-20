@@ -1,0 +1,175 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          <h2>Crear Cuenta</h2>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+
+            <div class="mb-3">
+              <label for="nombres" class="form-label">Nombres</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombres"
+                name="nombres"
+                [(ngModel)]="user.nombres"
+                required
+                pattern="[a-zA-Z\s]+"
+                #nombres="ngModel"
+                [class.is-invalid]="nombres.invalid && nombres.touched"
+              />
+              <div *ngIf="nombres.invalid && nombres.touched" class="text-danger small">
+                Solo letras y espacios, es obligatorio.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="apellidos" class="form-label">Apellidos</label>
+              <input
+                type="text"
+                class="form-control"
+                id="apellidos"
+                name="apellidos"
+                [(ngModel)]="user.apellidos"
+                required
+                pattern="[a-zA-Z\s]+"
+                #apellidos="ngModel"
+                [class.is-invalid]="apellidos.invalid && apellidos.touched"
+              />
+              <div *ngIf="apellidos.invalid && apellidos.touched" class="text-danger small">
+                Solo letras y espacios, es obligatorio.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="documentoIdentidad" class="form-label">Documento de Identidad</label>
+              <input
+                type="text"
+                class="form-control"
+                id="documentoIdentidad"
+                name="documentoIdentidad"
+                [(ngModel)]="user.documentoIdentidad"
+                required
+                pattern="^\d{8}$"
+                maxlength="8"
+                #documentoIdentidad="ngModel"
+                [class.is-invalid]="documentoIdentidad.invalid && documentoIdentidad.touched"
+              />
+              <div *ngIf="documentoIdentidad.invalid && documentoIdentidad.touched" class="text-danger small">
+                Debe tener exactamente 8 números.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="direccion" class="form-label">Dirección</label>
+              <input
+                type="text"
+                class="form-control"
+                id="direccion"
+                name="direccion"
+                [(ngModel)]="user.direccion"
+                required
+                #direccion="ngModel"
+                [class.is-invalid]="direccion.invalid && direccion.touched"
+              />
+              <div *ngIf="direccion.invalid && direccion.touched" class="text-danger small">
+                Este campo es obligatorio.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono</label>
+              <input
+                type="text"
+                class="form-control"
+                id="telefono"
+                name="telefono"
+                [(ngModel)]="user.telefono"
+                required
+                pattern="^\d{9}$"
+                maxlength="9"
+                #telefono="ngModel"
+                [class.is-invalid]="telefono.invalid && telefono.touched"
+              />
+              <div *ngIf="telefono.invalid && telefono.touched" class="text-danger small">
+                Debe tener exactamente 9 números.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="correo" class="form-label">Correo Electrónico</label>
+              <input
+                type="email"
+                class="form-control"
+                id="correo"
+                name="correo"
+                [(ngModel)]="user.correo"
+                required
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                email
+                #correo="ngModel"
+                [class.is-invalid]="correo.invalid && correo.touched"
+              />
+              <div *ngIf="correo.invalid && correo.touched" class="text-danger small">
+                Debe ser un correo válido.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="passwordUsuario" class="form-label">Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="passwordUsuario"
+                name="passwordUsuario"
+                [(ngModel)]="user.passwordUsuario"
+                required
+                minlength="8"
+                #passwordUsuario="ngModel"
+                [class.is-invalid]="passwordUsuario.invalid && passwordUsuario.touched"
+              />
+              <div *ngIf="passwordUsuario.invalid && passwordUsuario.touched" class="text-danger small">
+                Debe tener al menos 8 caracteres.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                name="confirmPassword"
+                [(ngModel)]="user.confirmPassword"
+                required
+                #confirmPassword="ngModel"
+                [class.is-invalid]="(confirmPassword.touched || registerForm.submitted) && user.passwordUsuario !== user.confirmPassword"
+              />
+              <div *ngIf="(confirmPassword.touched || registerForm.submitted) && user.passwordUsuario !== user.confirmPassword" class="text-danger small">
+                Las contraseñas no coinciden.
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="
+                !registerForm.form.valid || user.passwordUsuario !== user.confirmPassword
+              "
+            >
+              Registrarse
+            </button>
+
+          </form>
+
+          <div class="mt-3 text-center">
+            <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión aquí</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
