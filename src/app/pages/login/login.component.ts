@@ -1,11 +1,12 @@
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,NgIf],
+  imports: [ReactiveFormsModule,NgIf,FormsModule,CommonModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,7 +20,7 @@ loginForm = this.fb.group({
   passwordUsuario: ['',Validators.required],  
 });
 
-submit() {
+onSubmit() {
   console.log(this.loginForm.value);
   // Aquí puedes agregar la lógica para enviar el formulario al servidor
 if (this.loginForm.valid) {

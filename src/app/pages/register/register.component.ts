@@ -1,6 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component,OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/register/user.service'; // Adjust the path as needed
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +13,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 }) 
 
 export class RegisterComponent {
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+     private readonly ps: UserService,
+     private router : Router
+  ) {
     // Constructor logic can be added here if needed
     //"nombres": "Sofía",
     //"apellidos": "García Mendoza",
@@ -53,19 +58,26 @@ export class RegisterComponent {
       return this.registerForm.get('passwordUsuario')?.invalid && this.registerForm.get('passwordUsuario')?.touched;
     }
 
-
+insertarUsuario(data: any) {
+  this.ps.registerUser(data).subscribe((rest:any) => {
+    console.log(rest);
+    alert('Usuario registrado correctamente');
+    this.router.navigate(['/home']);
+  })
+}
 
   submit() {
     console.log(this.registerForm.value);
     // Aquí puedes agregar la lógica para enviar el formulario al servidor
   if (this.registerForm.valid) {
       // Lógica para enviar el formulario al servidor
+      this.insertarUsuario(this.registerForm.value);
       alert('Formulario enviado correctamente');
       console.log('Formulario enviado:', this.registerForm.value);
     }
     else {
       console.log('Formulario inválido');
-      console.log(this.registerForm.errors);
+      console.log(this.registerForm.value);
       alert('Por favor, completa todos los campos requeridos.');
     }
   }
