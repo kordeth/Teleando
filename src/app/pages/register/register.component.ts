@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '@services/auth/auth.service';
+import { LoaderService } from '@services/loader/loader.service';
+import { ErrorService } from '@services/error/error.service';
 
 @Component({
   selector: 'app-register',
-  standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -26,7 +27,9 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService,
+    private errorService: ErrorService
   ) {}
 
   onSubmit() {
@@ -39,16 +42,18 @@ export class RegisterComponent {
   
     this.authService.register(body).subscribe({
       next: (res) => {
+        this.loaderService.hide();
         if (res.isSuccess) {
           alert('Registro exitoso');
           this.router.navigate(['/login']);
         } else {
-          alert('Error: ' + res.errorMessage);
+          this.errorService.show();
         }
       },
       error: (err) => {
+        this.loaderService.hide();
         console.error(err);
-        alert('Error de conexión con el servidor');
+        this.errorService.show();
       }
     });
   }

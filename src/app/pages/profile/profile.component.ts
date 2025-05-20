@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '@services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
+import { LoaderService } from '@services/loader/loader.service';
+import { ErrorService } from '@services/error/error.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +18,11 @@ export class ProfileComponent {
   activeTab: string = 'profile';
   editableUser: any;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private loaderService: LoaderService,
+    private errorService: ErrorService) {
     this.loadEditableUser();
   }
 
@@ -34,7 +40,7 @@ export class ProfileComponent {
   }
 
   get user() {
-    return this.authService.getCurrentUser(); 
+    return this.authService.getCurrentUser();
   }
 
   saveChanges() {
@@ -47,14 +53,16 @@ export class ProfileComponent {
       telefono: this.editableUser.telefono,
       correo: this.editableUser.correo
     };
-
+    this.loaderService.show();
     this.authService.updateUser(updateData).subscribe({
       next: (res) => {
+        this.loaderService.hide();
         alert('Datos actualizados correctamente');
-        this.authService.updateCurrentUser(this.editableUser); 
+        this.authService.updateCurrentUser(this.editableUser);
       },
       error: (err) => {
-        alert('Error al actualizar datos');
+        this.loaderService.hide();
+        this.errorService.show();
         console.error(err);
       }
     });
@@ -62,13 +70,16 @@ export class ProfileComponent {
 
   deleteAccount() {
     if (confirm('¿Estás seguro de eliminar tu cuenta? Esta acción no se puede deshacer.')) {
+      this.loaderService.show();
       this.authService.deleteUser(this.editableUser.idusuario).subscribe({
         next: () => {
+          this.loaderService.hide();
           alert('Cuenta eliminada correctamente');
           this.logout();
         },
         error: (err) => {
-          alert('Error al eliminar cuenta');
+          this.loaderService.hide();
+          this.errorService.show();
           console.error(err);
         }
       });

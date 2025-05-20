@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '@services/auth/auth.service';
+import { LoaderService } from '@services/loader/loader.service';
+import { ErrorService } from '@services/error/error.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -20,26 +21,28 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService,
+    private errorService: ErrorService
   ) {}
 
   onSubmit() {
+    this.loaderService.show();
     this.authService.login(this.user).subscribe({
       next: (res) => {
+        this.loaderService.hide();
         if (res.isSuccess) {
-          
           this.authService.setSession(res.data);
-
           alert('¡Inicio de sesión exitoso!');
-
           this.router.navigate(['/']);
         } else {
-          alert('Error: ' + res.errorMessage);
+          this.errorService.show();
         }
       },
       error: (err) => {
+        this.loaderService.hide();
         console.error(err);
-        alert('Error de conexión con el servidor');
+        this.errorService.show();
       }
     });
   }
