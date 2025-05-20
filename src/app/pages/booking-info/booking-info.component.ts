@@ -9,6 +9,7 @@ import { BookingInfoService } from '@services/booking-info/booking-info.service'
 import { LoaderService } from '@services/loader/loader.service';
 import { ErrorService } from '@services/error/error.service';
 import { PrePaymentModel } from '@models/prepayment-model';
+import { AuthService } from '@services/auth/auth.service';
 
 @Component({
   selector: 'app-booking-info',
@@ -36,7 +37,8 @@ export class BookingInfoComponent {
     private router: Router, 
     private bookingInfoService: BookingInfoService, 
     private loaderService: LoaderService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private authService: AuthService
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { booking: BookingModel };
@@ -46,6 +48,16 @@ export class BookingInfoComponent {
       console.log('Booking Data:', this.bookingData);
     } else {
       console.warn('No booking data received.');
+    }
+  }
+
+  ngOnInit() {
+    const user = this.authService.getCurrentUser(); 
+    if (user) {
+      this.form.firstName = user.nombres;
+      this.form.lastName = user.apellidos;
+      this.form.email = user.correo;
+      this.form.phone = user.telefono;
     }
   }
 

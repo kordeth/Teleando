@@ -4,12 +4,12 @@
   input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched,
 select.ng-invalid.ng-touched {
-  border-color: #dc3545; /* rojo bootstrap */
+  border-color: #dc3545; 
   box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }
 
 .text-danger {
   color: #dc3545 !important;
   margin-top: 0.25rem;
-  font-size: 0.875em; /* tamaño un poco más pequeño */
+  font-size: 0.875em;
 }

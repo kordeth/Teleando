@@ -36,5 +36,21 @@ export class AuthService {
     return this.http.post<any>(`${loginUrl}/usuario`, user);
   }
   
+  updateUser(user: any): Observable<any> {
+    return this.http.put<any>(`${loginUrl}/usuario`, user);
+  }
 
+  deleteUser(idusuario: number): Observable<any> {
+    return this.http.delete<any>(`${loginUrl}/usuario?idusuario=${idusuario}`);
+  }
+  
+  getCurrentUser() {
+    return this.currentUser();
+  }
+
+  updateCurrentUser(user: any) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentUser.set(user);
+  }
+  
 }
