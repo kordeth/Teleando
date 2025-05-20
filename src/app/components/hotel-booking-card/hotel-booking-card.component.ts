@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   Input,
   OnChanges,
@@ -19,7 +18,6 @@ import { BookingModel } from '@models/booking-info-model';
   imports: [FormsModule, RouterModule, HourRangePickerComponent, CommonModule],
   templateUrl: './hotel-booking-card.component.html',
   styleUrl: './hotel-booking-card.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HotelBookingCardComponent {
 
@@ -51,28 +49,37 @@ export class HotelBookingCardComponent {
   }
 
   preselectFirstAvailableRoom(): void {
-    if (!this.isHotelDataReady()) {
-      console.log('Hotel data not ready yet, skipping preselection...');
-      return;
+      if (!this.isHotelDataReady()) {
+        console.log('Hotel data not ready yet, skipping preselection...');
+        return;
+      }
+
+      const hotelData = this.hotel();
+      const habitaciones = hotelData.tipoHabitacion[this.roomSelected()]?.habitaciones;
+
+      if (!habitaciones) {
+        this.selectedRoomId = null;
+        return;
+      }
+
+      const firstAvailable = habitaciones.find(room => 
+        room.disponible && this.isRoomAvailableByDate(room)
+      );
+
+      if (firstAvailable) {
+        this.selectedRoomId = firstAvailable.idHabitacion;
+      } else {
+        this.selectedRoomId = null;
+      }
     }
-  
-    const hotelData = this.hotel();
-    const habitaciones = hotelData.tipoHabitacion[this.roomSelected()]?.habitaciones;
-    const firstAvailable = habitaciones?.find(room => room.disponible);
-  
-    if (firstAvailable) {
-      this.selectedRoomId = firstAvailable.idHabitacion;
-    } else {
-      this.selectedRoomId = null;
-    }
-  }
+
 
   getSelectedRoomText(): string {
     const hotelData = this.hotel?.();
     if (!hotelData || !hotelData.tipoHabitacion) return 'Sin habitaciones disponibles';
   
     const habitaciones = hotelData.tipoHabitacion[this.roomSelected()]?.habitaciones;
-    const selectedRoom = habitaciones?.find(room => room.idHabitacion === this.selectedRoomId);
+    const selectedRoom = habitaciones.find(room => room.idHabitacion === this.selectedRoomId);
   
     if (selectedRoom) {
       return `Habitación ${selectedRoom.numeroHabitacion}`;
@@ -216,5 +223,4 @@ export class HotelBookingCardComponent {
     return overlap;
     });
   }
-
 }
